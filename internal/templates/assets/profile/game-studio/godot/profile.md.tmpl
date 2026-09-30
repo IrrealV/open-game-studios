@@ -1,0 +1,171 @@
+# {{.ProfileName}} (Godot Pack)
+
+Generated: {{.GeneratedAt}}
+
+This is the Godot-targeted Game-Studio profile artifact for the Pi-only runtime.
+
+## Runtime Targets
+- target_engine: {{.TargetEngine}}
+- primary_engine_in_doc: {{.PrimaryEngineDoc}}
+- persistence_mode: {{.PersistenceMode}}
+- setup_preset: {{.SetupPreset}}
+- preset_source: {{.PresetSource}}
+
+## Pack Metadata
+- pack_id: {{.PackID}}
+- pack_version: {{.PackVersion}}
+- pack_status: {{.PackStatus}}
+
+## MCP Placeholders
+- engram: enabled={{(index .MCPPlaceholders "engram").Enabled}}, mode={{(index .MCPPlaceholders "engram").Mode}}
+- context7: enabled={{(index .MCPPlaceholders "context7").Enabled}}, mode={{(index .MCPPlaceholders "context7").Mode}}
+- note: memory uses the Pi-native Engram companion; MCP adapters are optional and are not installed, enabled, or required by this profile.
+
+## CCGS Mapping
+{{- range .CCGSLayers}}
+- {{.}}: enabled
+{{- end}}
+
+## Visual Asset Pipeline Contract
+- contract_version: {{.AssetPipeline.ContractVersion}}
+- boundary: {{.AssetPipeline.Boundary}}
+- scope: visual assets only (sprites, textures, concept/reference images, blockouts, models, import metadata)
+- future_scope_excluded: standalone Hunyuan3D, TripoSR, Stable Fast 3D, TRELLIS.2, ComfyUI-3D-Pack entries
+
+## Visual Workflow Contract
+- contract_version: {{.VisualWorkflow.Contract.Version}}
+- boundary: {{.VisualWorkflow.Contract.Boundary}}
+- product_philosophy: guide coherent, enjoyable game-making through direction and review; this is not one-shot generation.
+- routes: {{range $idx, $route := .VisualWorkflow.GuidanceRoutes}}{{if $idx}}, {{end}}{{$route}}{{end}}
+- art_bible_path: {{.VisualWorkflow.Contract.Paths.ArtBible}}
+- asset_spec_path: {{.VisualWorkflow.Contract.Paths.AssetSpecs}}
+- asset_manifest_path: {{.VisualWorkflow.Contract.Paths.AssetManifest}} (separate {{.AssetPipeline.ContractVersion}} layer)
+- asset_audit_path: {{.VisualWorkflow.Contract.Paths.AssetAudit}}
+
+### /art-bible Guidance
+- capture visual pillars, style, palette, references, constraints, negative guidance, and human approval state.
+- default_status: {{.VisualWorkflow.Contract.ArtBible.Status}}
+- approval_state: {{.VisualWorkflow.Contract.ArtBible.ApprovalState}}
+- boundary: defaults are placeholders for human-authored direction, not approved art direction.
+
+### /asset-spec Guidance
+- capture asset intent, gameplay/narrative use, Art Bible link, output targets, prompt-ready metadata, import hints, and acceptance criteria.
+- default_status: {{.VisualWorkflow.Contract.AssetSpec.Status}}
+- art_bible_link: {{.VisualWorkflow.Contract.AssetSpec.ArtBibleLink}}
+- boundary: prompt-ready metadata is planning guidance only; it does not call ComfyUI, Blender, APIs, downloads, or generators.
+
+### /asset-audit Guidance
+- mode: {{.VisualWorkflow.Contract.Audit.Mode}}
+- default_status: {{.VisualWorkflow.Contract.Audit.Status}}
+- readiness_status: {{.VisualWorkflow.Contract.Readiness.Status}}
+- required_gates: {{range $idx, $gate := .VisualWorkflow.Contract.Readiness.RequiredGates}}{{if $idx}}, {{end}}{{$gate}}{{end}}
+- boundary: read-only review; no Godot project files, Blender scene files, DCC files, generated assets, conversions, audio/music/SFX, or human approval are created by this profile.
+
+### Allowed Adapter Catalog
+{{- range .AssetPipeline.AllowedAdapters}}
+- {{.ID}} ({{.Label}}): {{.ExecutionOwnership}}
+  - category: {{.Category}}
+  - supported_kinds: {{range $idx, $kind := .SupportedKinds}}{{if $idx}}, {{end}}{{$kind}}{{end}}
+  - limitations: {{range $idx, $item := .Limitations}}{{if $idx}}; {{end}}{{$item}}{{end}}
+{{- end}}
+
+### Selected Asset Preferences
+{{- if .AssetPipeline.Selected}}
+{{- range .AssetPipeline.Selected}}
+- {{.ID}}: metadata preference selected; no backend execution performed
+{{- end}}
+{{- else}}
+- none selected; manifest/import contract remains available as metadata only
+{{- end}}
+
+### Validation and Approval States
+- validation_status: {{range $idx, $state := .AssetPipeline.ValidationStates}}{{if $idx}}, {{end}}{{$state}}{{end}}
+- approval_state: {{range $idx, $state := .AssetPipeline.ApprovalStates}}{{if $idx}}, {{end}}{{$state}}{{end}}
+- note: validation status and human approval state are separate audit fields.
+
+### Godot/Blender Import Metadata Boundary
+- import_targets: {{range $idx, $target := .AssetPipeline.ImportTargets}}{{if $idx}}, {{end}}{{$target}}{{end}}
+- import metadata may describe target paths, settings, hints, and ownership boundaries only.
+- no Godot project files, Blender scene files, generated assets, conversions, downloads, APIs, or services are mutated or executed by this profile.
+
+## Core Game Workflow Contract
+- contract_version: {{.CoreGameWorkflow.Contract.Version}}
+- boundary: {{.CoreGameWorkflow.Contract.Boundary}}
+- mode_support: zero-to-one creation; direct phase invocation; repair/change handoff
+- approval_policy: status={{.CoreGameWorkflow.Contract.ApprovalPolicy.DefaultStatus}}, approval={{.CoreGameWorkflow.Contract.ApprovalPolicy.ApprovalState}}, auto_approved={{.CoreGameWorkflow.Contract.ApprovalPolicy.AutoApproved}}
+- approval_boundary: {{.CoreGameWorkflow.Contract.ApprovalPolicy.DecisionBoundary}}
+- phase_ids: {{range $idx, $phase := .CoreGameWorkflow.Contract.PhaseIDs}}{{if $idx}}, {{end}}{{$phase}}{{end}}
+- narrative_modes: {{range $idx, $mode := .CoreGameWorkflow.Contract.NarrativeModes}}{{if $idx}}, {{end}}{{$mode}}{{end}}
+- repair_classifications: {{range $idx, $class := .CoreGameWorkflow.Contract.RepairClassifications}}{{if $idx}}, {{end}}{{$class}}{{end}}
+- repair_change_handoff: {{range $idx, $step := .CoreGameWorkflow.Contract.RepairHandoffFlow}}{{if $idx}} → {{end}}{{$step}}{{end}}
+- downstream_references: {{range $idx, $ref := .CoreGameWorkflow.Contract.DownstreamReferences}}{{if $idx}}, {{end}}{{$ref.Target}}{{end}}
+
+### Mode Contracts
+{{- range .CoreGameWorkflow.Contract.ModeContracts}}
+- {{.ID}}: {{.Intent}}
+  - sequence: {{range $idx, $step := .Sequence}}{{if $idx}} → {{end}}{{$step}}{{end}}
+  - relevant_artifacts: {{range $idx, $artifact := .RelevantArtifacts}}{{if $idx}}, {{end}}{{$artifact}}{{end}}
+  - approval_requirement: {{.ApprovalRequirement}}
+  - downstream_behavior: {{.DownstreamBehavior}}
+{{- end}}
+
+### Downstream Relationships
+{{- range .CoreGameWorkflow.Contract.DownstreamReferences}}
+- {{.Target}}
+  - consumes: {{range $idx, $item := .Consumes}}{{if $idx}}, {{end}}{{$item}}{{end}}
+  {{- if .Verifies}}
+  - verifies: {{range $idx, $item := .Verifies}}{{if $idx}}, {{end}}{{$item}}{{end}}
+  {{- end}}
+  - approval_requirement: {{.ApprovalRequirement}}
+{{- end}}
+
+### Core Game Artifact Templates
+{{- range .CoreGameWorkflow.Templates}}
+- {{.ID}} ({{.Filename}}): {{.Purpose}}
+  - sections: {{range $idx, $section := .Sections}}{{if $idx}}, {{end}}{{$section}}{{end}}
+  - approval_default: status={{.ApprovalDefault.Status}}, approval={{.ApprovalDefault.ApprovalState}}, auto_approved={{.ApprovalDefault.AutoApproved}}
+{{- end}}
+
+### Brief Contracts
+{{- range .CoreGameWorkflow.Contract.BriefContracts}}
+- {{.ID}}: {{.Purpose}}
+  - fields: {{range $idx, $field := .Fields}}{{if $idx}}; {{end}}{{$field}}{{end}}
+{{- end}}
+
+## Model Routing Contract
+- contract_version: {{.ModelRouting.Contract.Version}}
+- core_game_workflow_version: {{.ModelRouting.Contract.CoreWorkflowVersion}}
+- routing_preset: {{.ModelRouting.Contract.RoutingPreset}}
+- routing_preset_source: {{.RoutingPresetSource}}
+- boundary: {{.ModelRouting.Contract.Boundary}}
+- validation: {{.ModelRouting.Contract.RoutingValidationResult.Status}} (can_continue={{.ModelRouting.Contract.RoutingValidationResult.CanContinue}})
+- binding_source: manual_or_runtime_owned
+- binding_boundary: manual user preferences only; Pi owns actual model selection and authentication and Gentle Shell owns orchestration
+
+### Production Capabilities
+{{- range .ModelRouting.Contract.Capabilities}}
+- {{.ID}} ({{.Label}})
+  - category: {{.Category}}
+  - requirement: {{.Requirement}}
+  - selected: {{.Selected}}
+  - configured_status: {{.ConfiguredStatus}}
+  - provider: {{.Provider}}
+  - model: {{.Model}}
+  - validation_status: {{.ValidationStatus}}
+  - boundary: {{.Boundary}}
+{{- end}}
+
+### Phase Routing
+{{- range .ModelRouting.Contract.PhaseRoutes}}
+- {{.PhaseID}} -> {{.Capability}} ({{.ValidationStatus}})
+{{- end}}
+
+### Model Routing No-Execution Boundary
+- no provider API calls
+- no model downloads
+- no image generation
+- no audio generation
+- no SDD execution
+- no Godot mutation
+- no ComfyUI/Blender execution
+- no auto-approval

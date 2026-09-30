@@ -1,0 +1,14 @@
+{
+  "name": "open-game-studios-pi-companion",
+  "private": true,
+  "license": "MIT",
+  "keywords": [
+    "pi-package"
+  ],
+  "pi": {
+    "skills": [
+      "./skills/ogs-godot-change",
+      "./skills/ogs-core"
+    ]
+  }
+}

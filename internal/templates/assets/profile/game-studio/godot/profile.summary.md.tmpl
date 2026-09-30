@@ -1,0 +1,64 @@
+# {{.ProfileName}} Generation Summary
+
+Generated: {{.GeneratedAt}}
+Engine: {{.TargetEngine}}
+Pack: {{.PackID}} ({{.PackVersion}} / {{.PackStatus}})
+- setup_preset: {{.SetupPreset}}
+- preset_source: {{.PresetSource}}
+
+## Artifact Set
+- profile: {{.ProfileArtifactPath}}
+- summary: {{.SummaryArtifactPath}}
+- hybrid map: {{.PatternArtifactPath}}
+- pack config: {{.ConfigArtifactPath}}
+
+## Future Packs (Explicit Placeholders)
+- unity: placeholder
+- ue5: placeholder
+
+## MCP Placeholders
+- engram: enabled={{(index .MCPPlaceholders "engram").Enabled}}, mode={{(index .MCPPlaceholders "engram").Mode}}, required={{(index .MCPPlaceholders "engram").Required}}
+- context7: enabled={{(index .MCPPlaceholders "context7").Enabled}}, mode={{(index .MCPPlaceholders "context7").Mode}}, required={{(index .MCPPlaceholders "context7").Required}}
+- note: memory uses the Pi-native Engram companion; MCP adapters are optional and never required.
+
+## Visual Asset Pipeline Preferences
+- contract_version: {{.AssetPipeline.ContractVersion}}
+- boundary: {{.AssetPipeline.Boundary}}
+- allowed_adapters: {{range $idx, $adapter := .AssetPipeline.AllowedAdapters}}{{if $idx}}, {{end}}{{$adapter.ID}}{{end}}
+- selected_adapters: {{if .AssetPipeline.Selected}}{{range $idx, $adapter := .AssetPipeline.Selected}}{{if $idx}}, {{end}}{{$adapter.ID}}{{end}}{{else}}none{{end}}
+- import_metadata_targets: {{range $idx, $target := .AssetPipeline.ImportTargets}}{{if $idx}}, {{end}}{{$target}}{{end}}
+- future_scope_excluded: Hunyuan3D; TripoSR; Stable Fast 3D; TRELLIS.2; ComfyUI-3D-Pack standalone
+- no_runtime_execution: no install, clone, build, run, API calls, service management, asset generation, conversion, or Godot/Blender file mutation
+
+## Visual Workflow Readiness Metadata
+- contract_version: {{.VisualWorkflow.Contract.Version}}
+- art_bible: {{.VisualWorkflow.Contract.Paths.ArtBible}} (status={{.VisualWorkflow.Contract.ArtBible.Status}}, approval={{.VisualWorkflow.Contract.ArtBible.ApprovalState}})
+- asset_spec: {{.VisualWorkflow.Contract.Paths.AssetSpecs}} (status={{.VisualWorkflow.Contract.AssetSpec.Status}})
+- asset_audit: {{.VisualWorkflow.Contract.Paths.AssetAudit}} (status={{.VisualWorkflow.Contract.Audit.Status}}, mode={{.VisualWorkflow.Contract.Audit.Mode}})
+- readiness_status: {{.VisualWorkflow.Contract.Readiness.Status}}
+- workflow_gates: {{range $idx, $gate := .VisualWorkflow.Contract.Gates}}{{if $idx}}, {{end}}{{$gate.ID}}={{$gate.Status}}{{end}}
+- separate_from_asset_manifest: visual-workflow/v1 guides readiness; asset-manifest/v1 remains the adapter/import record layer.
+- no_art_generated_or_approved: true; metadata only, no ComfyUI/Blender execution, no Godot/DCC mutation, no audio/music/SFX scope
+
+## Core Game Workflow Metadata
+- contract_version: {{.CoreGameWorkflow.Contract.Version}}
+- modes: zero-to-one creation; direct phase invocation; repair/change handoff
+- approval_policy: status={{.CoreGameWorkflow.Contract.ApprovalPolicy.DefaultStatus}}, approval={{.CoreGameWorkflow.Contract.ApprovalPolicy.ApprovalState}}, auto_approved={{.CoreGameWorkflow.Contract.ApprovalPolicy.AutoApproved}}
+- phase_ids: {{range $idx, $phase := .CoreGameWorkflow.Contract.PhaseIDs}}{{if $idx}}, {{end}}{{$phase}}{{end}}
+- narrative_modes: {{range $idx, $mode := .CoreGameWorkflow.Contract.NarrativeModes}}{{if $idx}}, {{end}}{{$mode}}{{end}}
+- brief_templates: {{range $idx, $template := .CoreGameWorkflow.Templates}}{{if $idx}}, {{end}}{{$template.ID}}={{$template.Filename}}{{end}}
+- repair_change_handoff: {{range $idx, $step := .CoreGameWorkflow.Contract.RepairHandoffFlow}}{{if $idx}} -> {{end}}{{$step}}{{end}}
+- downstream_relationships: {{range $idx, $ref := .CoreGameWorkflow.Contract.DownstreamReferences}}{{if $idx}}; {{end}}{{$ref.Target}} consumes {{range $consumeIdx, $consume := $ref.Consumes}}{{if $consumeIdx}}/{{end}}{{$consume}}{{end}}{{end}}
+- no_runtime_execution: no debugging execution, image generation, audio generation, automatic playtesting, collaboration layer, or engine mutation
+
+## Model Routing Metadata
+- contract_version: {{.ModelRouting.Contract.Version}}
+- core_game_workflow_version: {{.ModelRouting.Contract.CoreWorkflowVersion}}
+- routing_preset: {{.ModelRouting.Contract.RoutingPreset}}
+- routing_preset_source: {{.RoutingPresetSource}}
+- configured_status: not_configured by default; source=manual_or_runtime_owned; Pi owns actual model selection and authentication
+- required_capabilities: default_text, reasoning_heavy, fast_text, code_apply, qa_review
+- optional_capabilities: archive_summary, visual_review, godot_technical_review
+- future_capabilities: image_generation, image_review, audio_generation, audio_review
+- validation: {{.ModelRouting.Contract.RoutingValidationResult.Status}}; can_continue={{.ModelRouting.Contract.RoutingValidationResult.CanContinue}}
+- no_runtime_execution: no provider API calls, model downloads, image/audio generation, SDD execution, Godot mutation, ComfyUI/Blender execution, or auto-approval

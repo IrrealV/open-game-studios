@@ -1,0 +1,74 @@
+schema: spec-driven
+
+context: |
+  Tech stack: Go CLI installer/generator (module open-game-studios, Go 1.26.2) plus Pi companion skills; Linux/WSL first
+  Architecture: Pi host + Gentle Shell coordinator over a Godot-first studio domain, with a fingerprint-bound installer consent gate
+  Target: Game studios using Godot first (Unity/UE5 deferred); source-accepted, not installed-pack certified
+  Style: Markdown-based specs and profile definitions
+  Scope: Source-level and fixture acceptance only; real installation (G7) and platform certification remain pending
+  Managed wizard block: generated historical metadata, not hand-edited
+
+strict_tdd: false
+
+rules:
+  proposal:
+    - Include rollback plan for risky changes
+    - Identify affected profiles, agents, or workflows
+  specs:
+    - Use Given/When/Then format for scenarios
+    - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY)
+  design:
+    - Include sequence diagrams for complex agent handoffs
+    - Document architecture decisions with rationale
+  tasks:
+    - Group tasks by phase (infrastructure, implementation, testing)
+    - Use hierarchical numbering (1.1, 1.2, etc.)
+    - Keep tasks small enough to complete in one session
+  apply:
+    - Follow existing code patterns and conventions
+    - Load relevant coding skills for the project stack
+  verify:
+    - Run tests if test infrastructure exists
+    - Compare implementation against every spec scenario
+  archive:
+    - Warn before merging destructive deltas (large removals)
+
+testing:
+  strict_tdd: false
+  detected: 2026-04-22
+  runner:
+    command: go test ./... -count=1
+    framework: Go testing (stdlib)
+  layers:
+    unit:
+      available: true
+      tool: go test
+    integration:
+      available: true
+      tool: go test
+    e2e:
+      available: false
+      tool: ""
+  coverage:
+    available: true
+    command: "go test $(go list -f '{{if or .TestGoFiles .XTestGoFiles}}{{.ImportPath}}{{end}}' ./...) -cover"
+  quality_tools:
+    linter:
+      available: false
+      command: ""
+    type_checker:
+      available: true
+      command: "go test ./... -run '^$' -count=1"
+    formatter:
+      available: false
+      command: ""
+
+# BEGIN GAME-STUDIO WIZARD (managed)
+wizard:
+  profile_name: "Game-Studio"
+  profile_artifact: ".opencode/profiles/game-studio.md"
+  final_artifact: ".game-studio/generated/wizard/final.artifact.json"
+  sync_refresh_placeholder:
+    status: deferred
+    command_hint: "deferred placeholder: sync/refresh command is not implemented in this build"
+# END GAME-STUDIO WIZARD (managed)

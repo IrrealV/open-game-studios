@@ -1,0 +1,232 @@
+{
+  "profile": "{{.ProfileName}}",
+  "engine": "{{.TargetEngine}}",
+  "pack": {
+    "id": "{{.PackID}}",
+    "version": "{{.PackVersion}}",
+    "status": "{{.PackStatus}}"
+  },
+  "persistence_mode": "{{.PersistenceMode}}",
+  "setup_preset": "{{.SetupPreset}}",
+  "preset_source": "{{.PresetSource}}",
+  "routing_preset": "{{.RoutingPreset}}",
+  "routing_preset_source": "{{.RoutingPresetSource}}",
+  "layer_order": [
+    {{- range $idx, $layer := .CCGSLayers }}
+    {{- if $idx}},{{ end }}
+    "{{$layer}}"
+    {{- end }}
+  ],
+  "skill_agent_mapping": [
+    {{- range $idx, $mapping := .SkillAgentMap }}
+    {{- if $idx}},{{ end }}
+    {"skill":"{{$mapping.Skill}}","agent":"{{$mapping.Agent}}","role":"{{$mapping.Role}}"}
+    {{- end }}
+  ],
+  "mcp_placeholders": {
+    "engram": {
+      "enabled": {{(index .MCPPlaceholders "engram").Enabled}},
+      "mode": "{{(index .MCPPlaceholders "engram").Mode}}",
+      "required": {{(index .MCPPlaceholders "engram").Required}}
+    },
+    "context7": {
+      "enabled": {{(index .MCPPlaceholders "context7").Enabled}},
+      "mode": "{{(index .MCPPlaceholders "context7").Mode}}",
+      "required": {{(index .MCPPlaceholders "context7").Required}}
+    }
+  },
+  "asset_pipeline": {
+    "contract_version": "{{.AssetPipeline.ContractVersion}}",
+    "boundary": "{{.AssetPipeline.Boundary}}",
+    "allowed_adapters": [
+      {{- range $idx, $adapter := .AssetPipeline.AllowedAdapters }}
+      {{- if $idx}},{{ end }}
+      {"id":"{{$adapter.ID}}","label":"{{$adapter.Label}}","category":"{{$adapter.Category}}","execution_ownership":"{{$adapter.ExecutionOwnership}}"}
+      {{- end }}
+    ],
+    "selected_adapters": [
+      {{- range $idx, $adapter := .AssetPipeline.Selected }}
+      {{- if $idx}},{{ end }}
+      {"id":"{{$adapter.ID}}","label":"{{$adapter.Label}}","category":"{{$adapter.Category}}","execution_ownership":"{{$adapter.ExecutionOwnership}}"}
+      {{- end }}
+    ],
+    "import_targets": [
+      {{- range $idx, $target := .AssetPipeline.ImportTargets }}
+      {{- if $idx}},{{ end }}
+      "{{$target}}"
+      {{- end }}
+    ],
+    "future_scope_excluded": [
+      {{- range $idx, $item := .AssetPipeline.FutureScope }}
+      {{- if $idx}},{{ end }}
+      "{{$item}}"
+      {{- end }}
+    ]
+  },
+  "visual_workflow": {
+    "contract_version": "{{.VisualWorkflow.Contract.Version}}",
+    "boundary": "{{.VisualWorkflow.Contract.Boundary}}",
+    "paths": {
+      "art_bible": "{{.VisualWorkflow.Contract.Paths.ArtBible}}",
+      "asset_specs": "{{.VisualWorkflow.Contract.Paths.AssetSpecs}}",
+      "asset_manifest": "{{.VisualWorkflow.Contract.Paths.AssetManifest}}",
+      "asset_audit": "{{.VisualWorkflow.Contract.Paths.AssetAudit}}"
+    },
+    "readiness_status": "{{.VisualWorkflow.Contract.Readiness.Status}}",
+    "art_bible_approval_state": "{{.VisualWorkflow.Contract.ArtBible.ApprovalState}}",
+    "workflow_gates": [
+      {{- range $idx, $gate := .VisualWorkflow.Contract.Gates }}
+      {{- if $idx}},{{ end }}
+      {"id":"{{$gate.ID}}","status":"{{$gate.Status}}","requirement":"{{$gate.Requirement}}"}
+      {{- end }}
+    ],
+    "separate_from_asset_manifest": true,
+    "no_execution_claims": {
+      "art_generated": false,
+      "art_approved": false,
+      "comfyui_executed": false,
+      "blender_executed": false,
+      "godot_files_mutated": false,
+      "dcc_files_mutated": false,
+      "audio_music_sfx_scope": false
+    }
+  },
+  "core_game_workflow": {
+    "contract_version": "{{.CoreGameWorkflow.Contract.Version}}",
+    "boundary": "{{.CoreGameWorkflow.Contract.Boundary}}",
+    "supported_modes": [
+      {{- range $idx, $mode := .CoreGameWorkflow.Contract.SupportedModes }}
+      {{- if $idx}},{{ end }}
+      "{{$mode}}"
+      {{- end }}
+    ],
+    "mode_contracts": [
+      {{- range $idx, $mode := .CoreGameWorkflow.Contract.ModeContracts }}
+      {{- if $idx}},{{ end }}
+      {"id":"{{$mode.ID}}","intent":"{{$mode.Intent}}","sequence":[{{range $stepIdx, $step := $mode.Sequence}}{{if $stepIdx}},{{end}}"{{$step}}"{{end}}],"relevant_artifacts":[{{range $artifactIdx, $artifact := $mode.RelevantArtifacts}}{{if $artifactIdx}},{{end}}"{{$artifact}}"{{end}}],"approval_requirement":"{{$mode.ApprovalRequirement}}","downstream_behavior":"{{$mode.DownstreamBehavior}}"}
+      {{- end }}
+    ],
+    "phase_ids": [
+      {{- range $idx, $phase := .CoreGameWorkflow.Contract.PhaseIDs }}
+      {{- if $idx}},{{ end }}
+      "{{$phase}}"
+      {{- end }}
+    ],
+    "narrative_modes": [
+      {{- range $idx, $mode := .CoreGameWorkflow.Contract.NarrativeModes }}
+      {{- if $idx}},{{ end }}
+      "{{$mode}}"
+      {{- end }}
+    ],
+    "repair_classifications": [
+      {{- range $idx, $classification := .CoreGameWorkflow.Contract.RepairClassifications }}
+      {{- if $idx}},{{ end }}
+      "{{$classification}}"
+      {{- end }}
+    ],
+    "approval_policy": {
+      "default_status": "{{.CoreGameWorkflow.Contract.ApprovalPolicy.DefaultStatus}}",
+      "approval_state": "{{.CoreGameWorkflow.Contract.ApprovalPolicy.ApprovalState}}",
+      "auto_approved": {{.CoreGameWorkflow.Contract.ApprovalPolicy.AutoApproved}},
+      "decision_boundary": "{{.CoreGameWorkflow.Contract.ApprovalPolicy.DecisionBoundary}}",
+      "artifact_defaults": [
+        {{- range $idx, $approval := .CoreGameWorkflow.Contract.ApprovalPolicy.ArtifactDefaults }}
+        {{- if $idx}},{{ end }}
+        {"artifact_id":"{{$approval.ArtifactID}}","status":"{{$approval.Status}}","approval_state":"{{$approval.ApprovalState}}","auto_approved":{{$approval.AutoApproved}}}
+        {{- end }}
+      ]
+    },
+    "brief_contracts": [
+      {{- range $idx, $brief := .CoreGameWorkflow.Contract.BriefContracts }}
+      {{- if $idx}},{{ end }}
+      {"id":"{{$brief.ID}}","purpose":"{{$brief.Purpose}}","fields":[{{range $fieldIdx, $field := $brief.Fields}}{{if $fieldIdx}},{{end}}"{{$field}}"{{end}}]}
+      {{- end }}
+    ],
+    "markdown_templates": [
+      {{- range $idx, $template := .CoreGameWorkflow.Templates }}
+      {{- if $idx}},{{ end }}
+      {"id":"{{$template.ID}}","filename":"{{$template.Filename}}","purpose":"{{$template.Purpose}}","sections":[{{range $sectionIdx, $section := $template.Sections}}{{if $sectionIdx}},{{end}}"{{$section}}"{{end}}]}
+      {{- end }}
+    ],
+    "repair_change_handoff_flow": [
+      {{- range $idx, $step := .CoreGameWorkflow.Contract.RepairHandoffFlow }}
+      {{- if $idx}},{{ end }}
+      "{{$step}}"
+      {{- end }}
+    ],
+    "downstream_references": [
+      {{- range $idx, $ref := .CoreGameWorkflow.Contract.DownstreamReferences }}
+      {{- if $idx}},{{ end }}
+      {"target":"{{$ref.Target}}","consumes":[{{range $consumeIdx, $consume := $ref.Consumes}}{{if $consumeIdx}},{{end}}"{{$consume}}"{{end}}],"verifies":[{{range $verifyIdx, $verify := $ref.Verifies}}{{if $verifyIdx}},{{end}}"{{$verify}}"{{end}}],"approval_requirement":"{{$ref.ApprovalRequirement}}"}
+      {{- end }}
+    ],
+    "no_execution_claims": {
+      "debugging_executed": false,
+      "image_generated": false,
+      "audio_generated": false,
+      "playtesting_run": false,
+      "engine_files_mutated": false,
+      "collaboration_workflow_executed": false,
+      "claude_native_mechanics_enabled": false
+    }
+  },
+  "model_routing": {
+    "version": "{{.ModelRouting.Contract.Version}}",
+    "routing_boundary": "{{.ModelRouting.Contract.Boundary}}",
+    "core_game_workflow_version": "{{.ModelRouting.Contract.CoreWorkflowVersion}}",
+    "setup_preset": "{{.SetupPreset}}",
+    "preset_source": "{{.PresetSource}}",
+    "routing_preset": "{{.ModelRouting.Contract.RoutingPreset}}",
+    "routing_preset_source": "{{.RoutingPresetSource}}",
+    "capabilities": [
+      {{- range $idx, $cap := .ModelRouting.Contract.Capabilities }}
+      {{- if $idx}},{{ end }}
+      {"id":"{{$cap.ID}}","label":"{{$cap.Label}}","category":"{{$cap.Category}}","requirement":"{{$cap.Requirement}}","selected":{{$cap.Selected}},"configured_status":"{{$cap.ConfiguredStatus}}","provider":"{{$cap.Provider}}","model":"{{$cap.Model}}","validation_status":"{{$cap.ValidationStatus}}","notes":"{{$cap.Notes}}","boundary":"{{$cap.Boundary}}"}
+      {{- end }}
+    ],
+    "phase_routes": [
+      {{- range $idx, $route := .ModelRouting.Contract.PhaseRoutes }}
+      {{- if $idx}},{{ end }}
+      {"phase_id":"{{$route.PhaseID}}","capability":"{{$route.Capability}}","status":"{{$route.Status}}","validation_status":"{{$route.ValidationStatus}}","boundary":"{{$route.Boundary}}"}
+      {{- end }}
+    ],
+    "provider_model_bindings": [
+      {{- range $idx, $binding := .ModelRouting.Contract.ProviderModelBindings }}
+      {{- if $idx}},{{ end }}
+      {"capability":"{{$binding.Capability}}","provider":"{{$binding.Provider}}","model":"{{$binding.Model}}","configured_status":"{{$binding.ConfiguredStatus}}","binding_source":"{{$binding.BindingSource}}","requires_user_configuration":{{$binding.RequiresUserConfiguration}},"boundary":"{{$binding.Boundary}}"}
+      {{- end }}
+    ],
+    "capability_overrides": [],
+    "phase_overrides": [],
+    "override_status": "{{.ModelRouting.Contract.OverrideStatus}}",
+    "validation_result": "{{.ModelRouting.Contract.ValidationResult}}",
+    "unconfigured_required_capabilities": [{{range $idx, $cap := .ModelRouting.Contract.UnconfiguredRequiredCapabilities}}{{if $idx}},{{end}}"{{$cap}}"{{end}}],
+    "unconfigured_optional_capabilities": [{{range $idx, $cap := .ModelRouting.Contract.UnconfiguredOptionalCapabilities}}{{if $idx}},{{end}}"{{$cap}}"{{end}}],
+    "optional_capabilities": [{{range $idx, $cap := .ModelRouting.Contract.OptionalCapabilities}}{{if $idx}},{{end}}"{{$cap}}"{{end}}],
+    "future_capabilities": [{{range $idx, $cap := .ModelRouting.Contract.FutureCapabilities}}{{if $idx}},{{end}}"{{$cap}}"{{end}}],
+    "deferred_capabilities": [{{range $idx, $cap := .ModelRouting.Contract.DeferredCapabilities}}{{if $idx}},{{end}}"{{$cap}}"{{end}}],
+    "routing_validation_result": {
+      "status": "{{.ModelRouting.Contract.RoutingValidationResult.Status}}",
+      "can_continue": {{.ModelRouting.Contract.RoutingValidationResult.CanContinue}},
+      "warnings": [{{range $idx, $warning := .ModelRouting.Contract.RoutingValidationResult.Warnings}}{{if $idx}},{{end}}"{{$warning}}"{{end}}],
+      "blockers": [{{range $idx, $blocker := .ModelRouting.Contract.RoutingValidationResult.Blockers}}{{if $idx}},{{end}}"{{$blocker}}"{{end}}],
+      "deferred": [{{range $idx, $item := .ModelRouting.Contract.RoutingValidationResult.Deferred}}{{if $idx}},{{end}}"{{$item}}"{{end}}]
+    },
+    "no_execution_claims": {
+      "provider_api_calls": false,
+      "model_downloads": false,
+      "image_generation": false,
+      "audio_generation": false,
+      "sdd_execution": false,
+      "godot_mutation": false,
+      "comfyui_execution": false,
+      "blender_execution": false,
+      "auto_approval": false
+    }
+  },
+  "sdd_handoff": {
+    "enabled": true,
+    "mode": "phase-driven",
+    "bootstrap_stub": "marker-driven"
+  }
+}
