@@ -1,62 +1,161 @@
 # Open Game Studios
 
 Open Game Studios (OGS) is a human-led, Godot-first game-production workspace
-for the Pi host and the Gentle Shell coordinator. Today this repository holds
-three honest pieces: a Go CLI installer/generator, a small Pi companion skill
-package, and a source-accepted core-game brief library and CLI.
+for Pi and Gentle Shell. It combines six on-demand studio responsibilities
+(design, art direction, Blender, Godot, audio, QA) with explicit approval gates
+and truthful provenance.
+
+**Current components:**
+- Go CLI (`game-studio`) for workspace bootstrap, diagnostics, and staged wizard
+- Visual wizard with plan-only preview (Bubble Tea UI, human-accepted)
+- Core-game brief library: design → draft → consistency validation
+- Two agent roles (design specialist, Godot specialist) for read-only planning
+- Two Pi companion skills for brief workflows and Godot changes
+- Test fixtures: 2D movement with human playtest; 3D prototype in progress
 
 OGS is **not** a finished v1, not an installed product, and not a one-prompt
 game generator. The first-party source is MIT-licensed (see
 [Licensing](#licensing)).
 
-Canonical project home: <https://github.com/IrrealV/open-game-studios>.
+**Repository:** <https://github.com/IrrealV/open-game-studios>
 
 This repository is public and open for contributions as a work in progress.
 No installable release exists yet; see [Project status](docs/project-status.md)
 for current capabilities and evidence levels.
 
+## Development
+
+- **Branch protection:** `main` requires PR review; no force-push or direct commits
+- **CI:** Go workflow runs `go build` and `go test ./...` on all PRs
+- **Review policy:** See [CONTRIBUTING.md](CONTRIBUTING.md) for the full flow
+
 ## Current reality
 
+**What exists today:**
+
 - **Installer/generator (Go):** the `game-studio` CLI bootstraps a workspace,
-  runs host tool diagnostics, generates a Godot-first studio profile, and drives
-  a Pi-only staged wizard.
-- **Wizard:** prepares a fingerprint-bound prerequisite plan. A plan-only
-  preview is read-only; installation only runs after an explicit approval of
-  the exact printed fingerprint. The preview has human visual acceptance.
-- **Pi companion skills:** `ogs-core` routes a request and returns a bounded
-  handoff; `ogs-godot-change` scopes one bounded mechanic change or repair in a
-  trusted Godot 4 project.
+  runs host tool diagnostics, generates Godot-first studio profiles, and drives
+  a Pi-only staged wizard with fingerprint-bound prerequisite plans.
+- **Visual wizard:** plan-only preview with Bubble Tea UI (human visual
+  acceptance: compact 80×25 PTY rendering, scrollable install plan, fingerprint
+  disclosure). Installation (G7) runs only after explicit approval; the preview
+  is read-only.
 - **Core-game briefs:** `internal/workflows/coregame` and the `brief` CLI build
-  a pending design draft and validate it against a separately supplied recorded
-  decision. Validation is consistency-only and does not authenticate a human.
-- **Not done yet:** real installation (G7), Godot 3D, Blender production, audio
-  integration, independent game QA, the Quest 3S route, and the full end-to-end
-  journey. The six studio responsibilities are staged, not operational agents.
+  a pending design draft from a structured request and validate it against a
+  separately supplied recorded human decision. Validation checks consistency
+  only and does not authenticate a human or grant execution authority.
+- **Agent roles:** Two read-only specialists under `.pi/agents/`:
+  - **Design specialist** — invoked once for a creation proposal; the resulting
+    brief received human approval and passed CLI consistency validation
+  - **Godot specialist** — invoked once for read-only 3D planning; returned
+    bounded architecture and readiness steps without executing commands
+- **Pi companion skills:**
+  - `ogs-core` — classifies requests (creation/direct-phase/change/repair),
+    activates needed responsibilities, returns bounded handoffs
+  - `ogs-godot-change` — scopes one bounded mechanic change or repair in an
+    existing trusted Godot 4 project
+- **Test fixtures:**
+  - 2D Godot scene with movement/collision (human playtest: window, cyan square,
+    arrow keys, stopping on release)
+  - 3D prototype "One Small Reach" in progress (Godot 4.7.2 version verified;
+    scene not yet created)
+
+**Not done yet:**
+
+- Full installation (G7: skills loading, Engram persistence, resource validation)
+- Godot 3D scenes (in progress: engine verified, fixture architecture planned)
+- Blender production (V1-05)
+- Audio integration (V1-07)
+- Independent game QA (V1-08)
+- Quest 3S + OpenXR/hands (V1-09)
+- Full end-to-end journey with recovery (V1-11)
+
+**Six studio responsibilities** are staged as on-demand capabilities, not
+always-running agents. Two (design, Godot) have bounded exercise with documented
+handoffs; four (art direction, Blender, audio, QA) remain unexercised.
 
 See [docs/project-status.md](docs/project-status.md) for the full capability and
 evidence matrix.
 
 ## Goals
 
-Make a studio that works end to end — limited in depth but not missing an
-essential production area — while keeping the human in control:
+Build a studio that works end to end — limited in depth but not missing an
+essential production area — while keeping humans in control:
 
-- creation, direct-phase, change, and repair entry points without forcing a
-  full concept interview every time;
-- six on-demand responsibilities (design, art direction, Blender production,
-  Godot implementation, audio, independent game QA);
-- Godot-first execution with explicit engine handoffs;
-- mandatory human approval gates and truthful provenance;
-- reuse of the host's coordination, authentication, and models — no second
-  orchestrator or provider system.
+- **Four entry points:** creation, direct-phase, change, repair (no forced
+  concept interview every time)
+- **Six responsibilities:** design, art direction, Blender production, Godot
+  implementation, audio integration, independent game QA (on-demand, not
+  always-running)
+- **Godot-first:** explicit engine handoffs, bounded changes, verifiable outputs
+- **Mandatory approval gates:** human reviews every handoff; no autonomous
+  execution
+- **Truthful provenance:** asset sources, model usage, and limits are recorded
+- **Reuse host coordination:** Pi orchestration, Gentle Shell workflows,
+  existing auth/models (no second orchestrator or provider system)
+
+## What we learned from (adoption decisions)
+
+OGS **reuses, adapts, and builds** on existing tools rather than reinventing
+everything:
+
+### From Gentle AI and Gentle Shell
+
+**REUSE:**
+- Pi as the host orchestrator (no competing coordinator)
+- Gentle Shell's ODD/TDD/RDD workflows and guards
+- Engram for hybrid persistence (Pi memory + studio state)
+- Agent routing, subagent delegation, and work-unit commits
+- Installer/profile model and prerequisite fingerprinting
+- Native review integration (RDD) for bounded approval gates
+
+**ADAPT:**
+- Six studio responsibilities replace generic dev roles
+- Game-specific approval gates (GDD slices, asset specs, QA)
+- Godot-first handoffs (not engine-agnostic)
+- Bounded entry points (creation/phase/change/repair)
+
+**Source references:**
+- [gentle-ai](https://github.com/Gentleman-Programming/gentle-ai) — installer,
+  profiles, routing, hybrid persistence, RDD
+- [gentle-shell](https://github.com/Gentleman-Programming/gentle-shell) — ODD,
+  TDD, workflow chains, orchestrator patterns
+
+### From Claude Code Game Studios
+
+**ADAPT:**
+- Studio hierarchy concept (roles working as a team, not isolated agents)
+- Game-dev orchestration (idea → concept → GDD → implementation → QA)
+- Phase boundaries and handoff discipline
+- The insight that AI should work like a real studio, not a prompt generator
+
+**BUILD (OGS-specific):**
+- Go CLI for workspace bootstrap and diagnostics
+- Core-game brief library with draft/validation separation
+- Godot 4 bounded change skill
+- Visual wizard with fingerprint approval
+- Explicit provenance tracking for assets and decisions
+
+**Source reference:**
+- [Claude Code Game Studios](https://github.com/Donchitos/Claude-Code-Game-Studios) —
+  studio hierarchy, game-dev flow, team-like coordination
+
+### What OGS does NOT reuse
+
+- CCGS's full `.claude/` prompt catalog (adapted the studio flow, not the prompts)
+- Gentle AI's SDD (Spec-Driven Development) workflow (OGS uses direct handoffs)
+- Any authentication, model config, or PATH from upstream (users supply their own)
+
+**Adoption details:** See [docs/ogs-adoption-matrix.md](docs/ogs-adoption-matrix.md)
+for the full reuse/adapt/build matrix with evidence levels.
 
 ## Getting oriented
 
 | Document | What it answers |
 |---|---|
 | [docs/project-status.md](docs/project-status.md) | What works today, and at what evidence level. |
-| [docs/architecture.md](docs/architecture.md) | Source module map, boundaries, and the draft-vs-decision trust model. |
 | [docs/roadmap.md](docs/roadmap.md) | The 11 ordered V1 tasks, mandatory milestones, and deferred breadth. |
+| [docs/ogs-adoption-matrix.md](docs/ogs-adoption-matrix.md) | What we reuse, adapt, or build; evidence and priority. |
 | [docs/core-game-briefs.md](docs/core-game-briefs.md) | The core-game brief library and `brief` CLI in detail. |
 | [docs/generated-artifacts.md](docs/generated-artifacts.md) | Generated artifact classification and policy. |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | How to contribute. |
@@ -70,7 +169,7 @@ essential production area — while keeping the human in control:
 | `internal/` | Installer, wizard, commands, contracts, persistence, and tooling. |
 | `skills/` | Canonical Pi companion skills and their Go embedding. |
 | `.pi/agents/` | Two read-only project-local agent roles. |
-| `tests/`, `testdata/` | Node checkers, fixtures, and the Godot fixture. |
+| `tests/`, `testdata/` | Node checkers, fixtures, and Godot scenes. |
 | `docs/` | Canonical documentation. |
 
 ## Building and testing the source
@@ -82,35 +181,28 @@ go build ./cmd/game-studio
 go test ./... -count=1
 ```
 
-Honest cautions before you run this:
+**GitHub Actions** runs clean builds on `ubuntu-latest` with Go 1.26.2 for all
+PRs. Local testing has additional cautions:
 
 - The repository does not vendor Go modules. On a cold module cache, `go test`
-  downloads this module's dependencies from the configured module proxy.
-- The tests do not run engines or download game assets, but they are **not fully
-  isolated from their surroundings**. Workspace resolution walks ancestor
-  directories, so running the suite inside a checkout that has an ancestor
-  workspace marker or an ancestor `openspec/config.yaml` can cause some wizard
-  tests to write managed configuration through that ancestor instead of their
-  own temporary directory. Run the suite in an isolated copy of the checkout
-  with no ancestor workspace, and review anything a run wrote. Clean-clone
-  execution has not been observed for this documentation slice.
-- The `internal/cli/commands` tests install a no-op `engram` shim so tests never
-  touch a personal memory database. That shim exists for test safety only; it is
-  not a setup or installation instruction.
+  downloads dependencies from the configured module proxy.
+- Tests are **not fully isolated**. Workspace resolution walks ancestor
+  directories, so running inside a checkout with an ancestor workspace marker
+  or `openspec/config.yaml` can cause wizard tests to write through that
+  ancestor. Run in an isolated copy with no ancestor workspace.
+- `internal/cli/commands` tests install a no-op `engram` shim for safety; this
+  is not a setup instruction.
 
-Optional Node checks exercise the Godot fixture. The first command runs the
-structural checks only; the second is an opt-in native Godot headless example
-that needs an explicit engine binary and was **not** run for this slice:
+Optional Node checks exercise the Godot fixture. The first command runs
+structural checks only; the second needs an explicit engine binary:
 
 ```sh
 GODOT_BIN='' node --test tests/pi-godot-change.test.mjs
 GODOT_BIN=/absolute/path/to/godot4 node --test tests/pi-godot-change.test.mjs
 ```
 
-The source reads `GODOT_BIN` from the environment only and never auto-detects an
-engine, so setting `GODOT_BIN=''` explicitly prevents an inherited value from
-launching Godot by accident. These checks cover the selected movement behavior
-only. They do not prove visual quality, fun, exports, or full-studio readiness.
+Setting `GODOT_BIN=''` prevents inherited values. These checks cover movement
+behavior only, not visual quality, fun, exports, or full-studio readiness.
 
 ## CLI commands
 
@@ -118,79 +210,74 @@ only. They do not prove visual quality, fun, exports, or full-studio readiness.
 |---|---|
 | `game-studio init` | Bootstraps and verifies the workspace skeleton. |
 | `game-studio env-check` | Runs host tool diagnostics for Godot, Blender, or selected tools. |
-| `game-studio generate` | Emits flat `studio-profile.<engine>.md` / `.summary.md`, pack metadata, and the hybrid map. |
+| `game-studio generate` | Emits flat `studio-profile.<engine>.md` / `.summary.md`, pack metadata, and hybrid map. |
 | `game-studio wizard` | Runs the Pi-only staged installer/personalization wizard. |
 | `game-studio smoke` / `smoke-suite` | Validates generated layout and content. |
 | `game-studio brief draft` / `brief check` | Builds a pending core-game draft, or checks one against a recorded decision. |
 
-The wizard exposes two **mutually exclusive** non-installing modes, and combining
-them is rejected: `--plan-only` renders the read-only prerequisite plan and
-fingerprint without writing, while `--metadata-only` runs the artifact-only path.
-`--metadata-only` writes local profile/pack artifacts, the workspace config, and
-the final artifact, and attempts the Engram memory write-through, so it is **not**
-read-only and a missing Engram companion can return a partial error. Real
-prerequisite installation runs only after an explicit
-`--approve-plan <fingerprint>` approval, which itself requires
-`--non-interactive`; `--non-interactive` alone never authorizes installation.
-Details are in [docs/architecture.md](docs/architecture.md) and
-[docs/core-game-briefs.md](docs/core-game-briefs.md).
+**Wizard modes** (mutually exclusive):
+- `--plan-only` — read-only preview with fingerprint (no writes)
+- `--metadata-only` — writes profile/workspace/artifacts, attempts Engram
+  (not read-only; can return partial error if Engram unavailable)
+- `--approve-plan <fingerprint>` + `--non-interactive` — real installation
+
+`--non-interactive` alone never authorizes installation. See
+[docs/core-game-briefs.md](docs/core-game-briefs.md) for details.
 
 ## Pi companion skills
 
-`skills/ogs-core` is the entry skill: it classifies a request as creation, a
-direct phase, a change, or a repair, activates only the responsibilities it
-needs, and returns a bounded handoff using its local
-[handoff contract](skills/ogs-core/references/handoff-contract.md).
-`skills/ogs-godot-change` is the bounded skill for changing or repairing one
-mechanic in an existing trusted Godot 4 project.
-
-Load the skills you intend to use for one session without changing personal
-settings. `--skill` is repeatable, and loading `ogs-core` does not register the
-sibling skill, so name each one explicitly:
+Load skills explicitly without changing personal settings:
 
 ```sh
 pi --skill ./skills/ogs-core/SKILL.md --skill ./skills/ogs-godot-change/SKILL.md
 ```
 
-Then invoke `/skill:ogs-core`, or `/skill:ogs-godot-change` for a bounded Godot
-change. Loading a skill grants no install, download, or destructive authority;
-those still require a concrete plan and explicit human consent. When Godot 4
-readiness is unknown, [the Godot setup reference](skills/ogs-godot-change/references/godot-setup.md)
-describes an optional, reviewable setup plan and stops at its approval gate.
+Then invoke `/skill:ogs-core` or `/skill:ogs-godot-change`. Loading grants no
+install/download/destructive authority; those need concrete plans and explicit
+human consent.
 
-The two files under `.pi/agents/` are read-only project role definitions. The
-[Godot role](.pi/agents/ogs-godot-specialist.md) has been host-discovered and
-used once for a bounded source-local handoff. The
-[design role](.pi/agents/ogs-design-specialist.md) was invoked once for a
-creation proposal; one observed human decision on the resulting brief passed
-CLI consistency validation. That check grants no execution authority. See the
-[capability checkpoint](docs/project-status.md) for the bounded acceptance and
+**Agent roles** under `.pi/agents/` are read-only definitions:
+- **Design specialist** — invoked once; returned 8-section creation proposal
+  that received human approval and passed CLI consistency validation
+- **Godot specialist** — invoked once for 3D readiness planning; no commands
+  executed
+
+See [docs/project-status.md](docs/project-status.md) for bounded acceptance and
 remaining work. Source-checkout paths are not installed-pack evidence.
 
 ## Licensing
 
-First-party source in this repository is licensed under the MIT License; see
-[LICENSE](LICENSE) (Copyright (c) 2026 IrrealV).
+First-party source is MIT-licensed; see [LICENSE](LICENSE) (Copyright (c) 2026
+IrrealV).
 
-Third-party components, dependencies, and assets keep their own licenses and
-notices. This repository's MIT license does **not** relicense any dependency,
-upstream project, or asset. A full third-party attribution audit is still
-pending; no external notices are fabricated here, and existing notices are not
-removed. Recorded third-party attribution is listed in
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+Third-party components keep their own licenses. This repository's MIT license
+does **not** relicense dependencies or assets. See
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for recorded attributions.
 
 ## Credits
 
-This project learns from:
+OGS learns from and builds on:
 
-- **[Claude Code Game Studios](https://github.com/Donchitos/Claude-Code-Game-Studios)** —
-  inspiration for studio hierarchy, game-dev orchestration, and the idea that an
-  AI should work like a real team.
 - **[gentle-ai](https://github.com/Gentleman-Programming/gentle-ai)** —
-  inspiration for the installer/profile model, workflow routing, hybrid
-  persistence, and the "one tool, many workflows" approach.
+  installer/profile model, workflow routing, hybrid persistence (Engram),
+  native review integration (RDD), and the "one tool, many workflows" approach.
+  OGS reuses Pi orchestration and adapts bounded approval gates for game-dev.
+  
+- **[gentle-shell](https://github.com/Gentleman-Programming/gentle-shell)** —
+  ODD (Organic Driven Development), TDD, workflow chains, and orchestrator
+  patterns. OGS reuses these disciplines and adapts them to six studio
+  responsibilities.
+  
+- **[Claude Code Game Studios](https://github.com/Donchitos/Claude-Code-Game-Studios)** —
+  studio hierarchy, game-dev orchestration (idea → GDD → implementation → QA),
+  and the insight that AI should work like a real team. OGS adapts the studio
+  flow without copying prompts or catalog structure.
 
-Game-Studio is **not** a direct copy of either project.
+OGS is **not** a fork or direct copy of any upstream project. It reuses
+coordination, adapts workflows, and builds game-specific capabilities on top.
+
+See [docs/ogs-adoption-matrix.md](docs/ogs-adoption-matrix.md) for the full
+reuse/adapt/build breakdown.
 
 <a href="https://github.com/Gentleman-Programming/gentle-ai">
   <img width="220" src="https://raw.githubusercontent.com/Gentleman-Programming/gentle-ai/main/docs/assets/brand/built-with-gentle-ai.png" alt="Built with Gentle-AI" />
