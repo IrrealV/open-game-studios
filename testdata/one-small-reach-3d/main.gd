@@ -8,11 +8,13 @@ var collected := false
 var collection_events := 0
 
 var player: Node3D
+var collectible: Node3D
 var collectible_body: Node3D
 var message: Label
 
 func _ready() -> void:
 	player = $Player
+	collectible = $Collectible
 	collectible_body = $Collectible/Body
 	message = $UI/Message
 	message.visible = false
@@ -28,8 +30,8 @@ func _physics_process(delta: float) -> void:
 	player.position.z = clampf(player.position.z, -BOUNDS, BOUNDS)
 	
 	if not collected:
-		var dx := player.position.x - collectible_body.position.x
-		var dz := player.position.z - collectible_body.position.z
+		var dx := player.position.x - collectible.position.x
+		var dz := player.position.z - collectible.position.z
 		var distance := sqrt(dx * dx + dz * dz)
 		
 		if distance <= COLLECTION_RADIUS:
@@ -50,8 +52,8 @@ func physics_step(direction: Vector2, delta_time: float) -> void:
 	player.position.z = clampf(player.position.z, -BOUNDS, BOUNDS)
 	
 	if not collected:
-		var dx := player.position.x - collectible_body.position.x
-		var dz := player.position.z - collectible_body.position.z
+		var dx := player.position.x - collectible.position.x
+		var dz := player.position.z - collectible.position.z
 		var distance := sqrt(dx * dx + dz * dz)
 		
 		if distance <= COLLECTION_RADIUS:
