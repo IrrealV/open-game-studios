@@ -65,6 +65,10 @@ func (a *App) Run(args []string) error {
 		return commands.RunBrief(commands.BriefInput{
 			Args: args[1:],
 		})
+	case "visual":
+		return commands.RunVisual(commands.VisualInput{
+			Args: args[1:],
+		})
 	case "help", "-h", "--help":
 		fmt.Print(a.help())
 		return nil
@@ -87,6 +91,7 @@ Commands:
   smoke       Validate generated artifact layout and metadata
   smoke-suite Run deterministic smoke harness + report
   brief       Build a pending core-game draft, or check one against a recorded decision
+  visual      Validate Art Bible / Asset Spec docs and run a read-only visual audit
 
 Notes:
   - The staged wizard targets Pi only. It prepares a fingerprint-bound prerequisite plan and, after explicit approval, installs missing components; --metadata-only keeps artifact-only generation.
@@ -95,5 +100,6 @@ Notes:
   - Godot generation path is the only supported concrete engine output today.
   - CCGS semantics are preserved through layered registry metadata.
   - brief draft writes only pending artifacts; brief check is consistency validation of a claimed recorded decision and grants no authority.
+  - visual is metadata only: it never executes ComfyUI/Blender, generates assets, mutates Godot/DCC files, or self-approves an Art Bible.
 `
 }
