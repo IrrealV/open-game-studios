@@ -28,9 +28,9 @@ installed-pack, engine, or whole-product acceptance.
 | `ogs-core` entry skill + handoff contract | Accepted | Observed once, source-local | n/a | n/a | Not run | n/a |
 | `ogs-godot-change` bounded change skill | Accepted | Guidance consumed in the same bounded handoff | Historical 2D fixture only | Historical 2D playtest | Not run | Not run |
 | Godot specialist role (`.pi/agents/ogs-godot-specialist.md`) | Present | Host-discovered and used once | Not run | Not run | Not run | Not run |
-| Design specialist role (`.pi/agents/ogs-design-specialist.md`) | Present | Host-listed; not invoked | Not run | Not yet | Not run | Not run |
+| Design specialist role (`.pi/agents/ogs-design-specialist.md`) | Present | Invoked once for a creation handoff | n/a | One creation brief approved | Not run | n/a |
 | Core-game brief library (`internal/workflows/coregame`) | Accepted | n/a | n/a | n/a | n/a | n/a |
-| `game-studio brief draft` / `brief check` CLI | Accepted | n/a | n/a | Fixtures only | n/a | n/a |
+| `game-studio brief draft` / `brief check` CLI | Accepted | n/a | n/a | Fixtures plus one observed creation approval (consistency only) | n/a | n/a |
 | Wizard plan-only preview | Accepted | PTY-exercised | n/a | Human accepted | Not run | n/a |
 | Installer backend (detect / plan / consent / execute) | Accepted | Not run | Not run | Not run | Pending (G7) | n/a |
 | Godot 2D movement slice | Accepted | n/a | Historical observed | Historical human playtest | Not run | n/a |
@@ -62,7 +62,7 @@ project roles.
 
 | Responsibility | Current state |
 |---|---|
-| Game design | Read-only design role file exists; not yet invoked or independently accepted. |
+| Game design | Read-only design role invoked once for a creation brief; one human approval observed and consistency-checked. |
 | Art direction | Staged. Contracts exist as metadata; no operational role. |
 | Blender production | Staged. No execution route connected. |
 | Godot implementation | Read-only diagnosis role used once; no 3D execution slice. |
@@ -86,11 +86,30 @@ project roles.
 
 ## Current next task
 
-**V1-02 — make design and its existing contracts executable.** The library and
-CLI are accepted at source/fixture scope. What remains is an actual bounded
-design-role handoff and an **observed** human approval gate before any
-production step. This is not a stale design-writer task: the writer step for the
-role file is done, and the remaining work is invocation and observed acceptance.
+**V1-03 — implement and check a small Godot 3D task.** The accepted design cut
+is the input: a bounded, disposable 3D scene or script with explicit criteria
+and independent checking. It is not another design interview and not a
+full-platform certification.
+
+**V1-02 — make design and its existing contracts executable — is accepted at
+bounded source-local scope.** The read-only design role was invoked once for a
+creation request and returned an eight-section `gdd-slice` creation proposal
+(a `coregame.DraftRequest`), not an approval or an executable plan. The `brief`
+CLI built once, produced the canonical pending draft from that proposal once,
+and then accepted the downstream consistency of an observed human approval of
+that exact One Small Reach creation brief, once, with no timeout. The pending
+draft kept `Status: draft`, `ApprovalState: pending_human_approval`, and
+`AutoApproved: false`; those fields are never the approval. The CLI's acceptance
+is **consistency validation only**: it does not authenticate a human, capture
+consent, or grant execution authority. The library and CLI support creation,
+direct-phase, change, and repair routes, but only this one live creation journey
+was observed; the other routes rest on historically accepted source and
+fixtures, not live runs. The committed example request and the
+[design-first handoff guide](design-first-handoff.md) are a frozen, pending
+drafting example with no approval record attached. The separate observed human
+decision was applied to that exact content in one guided run; the example alone
+is not approval or execution authority and cannot be inherited by another user
+or run.
 
 ## Publication status
 
@@ -104,8 +123,8 @@ tree, not as a published release.
 
 - No fresh build, engine run, installation, or full-journey acceptance was
   performed for the current documentation slice.
-- The six responsibilities are staged; only the Godot role has a recorded real
-  bounded invocation.
+- The six responsibilities are staged; the Godot and design roles each have one
+  recorded real bounded invocation.
 - Blender, audio, independent game QA, Godot 3D, and the Quest 3S route remain
   open, as does the full end-to-end continuation journey.
 - Model identity, complete tool confinement, and multi-platform readiness are
