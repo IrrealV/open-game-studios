@@ -1,6 +1,7 @@
 ---
 version: 1
-approval_state: pending
+approval_state: approved
+approved_by: "IrrealV"
 ---
 
 # Art Bible — One Small Reach (disposable 3D fixture)
