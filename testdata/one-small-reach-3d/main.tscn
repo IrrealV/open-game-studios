@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=3 uid="uid://c5w8qvxg0yxqp"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_u2kme"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
+size = Vector2(8, 8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
+albedo_color = Color(0.3, 0.3, 0.3, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
+radius = 0.3
+height = 1.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_player"]
+albedo_color = Color(0, 0.7, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_collectible"]
+radius = 0.3
+height = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_collectible"]
+albedo_color = Color(1, 0.8, 0, 1)
+
+[sub_resource type="Environment" id="Environment_default"]
+background_mode = 1
+background_color = Color(0.15, 0.15, 0.2, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.8, 0.8, 0.8, 1)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_u2kme")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_floor")
+surface_material_override/0 = SubResource("StandardMaterial3D_floor")
+
+[node name="Player" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.8, 0)
+
+[node name="Body" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("CapsuleMesh_player")
+surface_material_override/0 = SubResource("StandardMaterial3D_player")
+
+[node name="Collectible" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.8, 0)
+
+[node name="Body" type="MeshInstance3D" parent="Collectible"]
+mesh = SubResource("SphereMesh_collectible")
+surface_material_override/0 = SubResource("StandardMaterial3D_collectible")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 7)
+projection = 1
+size = 10.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 5, 0)
+light_energy = 0.8
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_default")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Message" type="Label" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -50.0
+offset_right = 100.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Collected!"
+horizontal_alignment = 1
+vertical_alignment = 1
