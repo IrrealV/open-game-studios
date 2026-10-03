@@ -78,9 +78,10 @@ project roles.
 - A 2D Godot fixture was executed headlessly and received a human playtest.
   This supports the 2D movement behavior only; it is not 3D, audio, Blender,
   device, or full-journey evidence.
-- Native review outcomes were historically **unavailable or blocked** for the
-  relevant candidates. No native approval exists for any work described here,
-  and independent technical checks do not substitute for it.
+- Three bounded native reviews were completed and their authority consumed for
+  the design-handoff delivery (DH-01, DH-02, DH-03). Earlier candidates were
+  historically unavailable or blocked. Independent technical checks do not
+  substitute for native review.
 - Historical evidence describes earlier repository states. It must not be
   promoted to current product readiness.
 
@@ -113,11 +114,10 @@ or run.
 
 ## Publication status
 
-This repository is being prepared for a reviewed public snapshot. The rename of
-the private repository, the private memory backup, the public-candidate assembly
-check, and the publication itself are **not executed** by the current
-documentation slice. Treat this page as the current checkpoint of the source
-tree, not as a published release.
+This repository is public and open for contributions as a work in progress.
+The private repository was renamed and backed up, the public-candidate assembly
+was checked, and main branch protection is active. This page reflects the
+current source checkpoint, not a finished release or installed product.
 
 ## Known limitations
 

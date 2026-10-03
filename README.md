@@ -9,9 +9,11 @@ OGS is **not** a finished v1, not an installed product, and not a one-prompt
 game generator. The first-party source is MIT-licensed (see
 [Licensing](#licensing)).
 
-Canonical project home (planned): <https://github.com/IrrealV/open-game-studios>.
-This page does not assert that the repository is already public, that it is
-published, or that any installable release exists.
+Canonical project home: <https://github.com/IrrealV/open-game-studios>.
+
+This repository is public and open for contributions as a work in progress.
+No installable release exists yet; see [Project status](docs/project-status.md)
+for current capabilities and evidence levels.
 
 ## Current reality
 
