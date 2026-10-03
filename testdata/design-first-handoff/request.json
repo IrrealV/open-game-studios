@@ -1,0 +1,42 @@
+{
+  "Mode": "zero-to-one creation",
+  "Phase": "gdd-slice",
+  "Request": "DH-01: Draft a neutral disposable prototype consisting of one tiny Godot 3D scene where the player moves and collects one object. This is not the user's production game. All specific design choices below are proposals for human review; this request is unapproved, CLI-unexecuted, and grants no production authority.",
+  "Classification": "",
+  "Target": "Godot handoff",
+  "Contents": [
+    {
+      "Section": "game concept",
+      "Body": "Working concept: One Small Reach. In a single compact 3D practice space, the player guides a primitive avatar toward one clearly visible sphere and collects it by approaching. The intended experience is a brief, calm moment of agency: understand the destination, move deliberately, and receive unmistakable confirmation. Proposed scope is one scene, one player, one flat bounded floor, one fixed camera, and one collectible. This is a disposable interaction prototype, not a production game or a promise of future features."
+    },
+    {
+      "Section": "game pillars",
+      "Body": "1. Readable intention: the player and sole collectible are visible together from the starting position; simple instructions identify movement and the collection goal. 2. Direct control: movement responds immediately, stops on release, and has equal axial and diagonal speed. 3. Unambiguous closure: collection removes the object and changes a short objective label to a persistent completion message exactly once. Every proposed element serves movement, collection, or their readability; unrelated systems are excluded."
+    },
+    {
+      "Section": "core loop",
+      "Body": "Micro loop: press a direction, observe the avatar translate, release or correct direction, and observe the response. Meso loop: identify the visible sphere, steer across the floor, and enter its pickup radius. Macro loop: collect the only object and see 'Collected - complete'. This is one complete traversal rather than a repeatable progression loop. Movement remains available afterward, but no new object, reward, next level, or restart interface appears. Reopening the scene for later checks is outside the gameplay loop."
+    },
+    {
+      "Section": "player fantasy",
+      "Body": "The player is a capable mover completing one small, understandable task. Satisfaction should come from a clear connection between intention, motion, and success, not character identity, power accumulation, or narrative stakes. The prototype supports competence through predictable control. Challenge is limited to steering toward the target; there is no timer, failure penalty, adaptive difficulty, or progression. Whether movement feels responsive and success feels clear requires a later human playtest."
+    },
+    {
+      "Section": "mechanics brief",
+      "Body": "Proposed layout: an 8-by-8-unit flat floor centered at the origin, with a capsule avatar starting at X=-2, Z=0 and one sphere at X=2, Z=0. A fixed elevated orthographic camera keeps the entire floor visible. Proposed controls: WASD and arrow keys move along the floor; up moves toward screen-top, right toward screen-right. Resolve opposing inputs to zero on that axis and normalize combined input so diagonal movement is not faster. Proposed speed is 3 units per second, with immediate start and stop, no inertia, jumping, sprinting, or camera controls. Keep the avatar supported on the floor and its center within X/Z bounds of -3.5 to 3.5. Collection occurs when horizontal center-to-center distance to the sphere is at most 0.6 units. The transition is one-way from available to collected: remove the sphere and replace 'Move: WASD / arrows. Collect the sphere.' with 'Collected - complete'. Repeated overlap must not repeat completion, and movement may continue after collection. Later acceptance checks should verify equal directional speed, approximately 3 units of unobstructed travel in one second, stopping on release, containment, no spawn pickup, and exactly one collection transition. All numeric and control choices require human review."
+    },
+    {
+      "Section": "narrative brief",
+      "Body": "Narrative mode: none_or_mechanics_first. There is no story, lore, named character, dialogue, quest giver, or implied larger world. The instruction to collect the sphere is a functional objective only. Completion confirms the interaction without introducing fiction or further obligations."
+    },
+    {
+      "Section": "tone and mood",
+      "Body": "Neutral, calm, and legible rather than dramatic or branded. Proposed primitive visuals are a matte light-gray floor, a dark capsule player, and an amber sphere. Shape and position distinguish the target independently of color. Use plain readable objective text and simple lighting sufficient to show ground contact. No custom modeling, textures, visual effects, animation sequence, music, or sound is proposed. The fixed camera favors readability over immersion; visual quality remains subject to later human review."
+    },
+    {
+      "Section": "story constraints",
+      "Body": "Preserve the mechanics-first, story-free scope. Do not add backstory, factions, stakes, dialogue, environmental storytelling, rewards, moral framing, or references to the user's production game. Do not expand the single collectible into inventory, scoring, respawning objects, progression, or additional objectives. No enemies, hazards, timer, failure state, restart UI, authored assets, Blender production, audio, export, or platform/device claims belong to this slice. Human approval of this exact proposal remains pending; subsequent implementation requires a separate bounded authorization."
+    }
+  ],
+  "References": []
+}

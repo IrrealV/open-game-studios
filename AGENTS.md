@@ -12,16 +12,28 @@ specific harness, model, or private memory system.
 
 ## Current next task
 
-The open implementation task is **V1-02 — make design and its existing contracts
-executable** (see the roadmap). After the current publication-documentation
-work, the next concrete step is a bounded design-role handoff followed by an
-**observed** human approval gate.
+The next concrete implementation task is **V1-03 — implement and check a small
+Godot 3D task** (see the roadmap). It is a bounded, disposable 3D slice that
+follows the accepted design cut; it is not another design interview, and it is
+not full-platform certification.
 
-The core-game brief library and the `brief` CLI are already accepted at source
-scope. The design role file exists and is host-listable, but it has not been
-invoked or independently accepted. Do not treat a draft `Status`, an
-`ApprovalState` field, or a synthetic test decision as approval, and do not
-describe V1-02 as complete.
+**V1-02 is accepted at bounded source-local scope.** The read-only design role
+was actually invoked once for a creation request and returned an eight-section
+`gdd-slice` creation proposal (a `coregame.DraftRequest`), not an approval or an
+executable plan; the `brief` CLI then produced the canonical pending draft from
+that proposal and accepted the downstream consistency of an observed human
+approval of that exact One Small Reach creation brief. The completed run built
+the CLI once, produced one pending draft once, and accepted one approved
+decision once, with no timeout.
+
+The pending draft kept `Status: draft`, `ApprovalState: pending_human_approval`,
+and `AutoApproved: false`; those fields are never approval. The CLI acceptance
+is **consistency validation only**: it does not authenticate a human, capture
+consent, or grant execution authority. The library and CLI support creation,
+direct-phase, change, and repair routes, but only this one live creation journey
+was observed; the other routes rest on historically accepted source and
+fixtures, not on four live invocations. Do not treat a draft `Status`, an
+`ApprovalState` field, or a synthetic test decision as approval.
 
 ## Working rules
 

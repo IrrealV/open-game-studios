@@ -159,9 +159,11 @@ describes an optional, reviewable setup plan and stops at its approval gate.
 The two files under `.pi/agents/` are read-only project role definitions. The
 [Godot role](.pi/agents/ogs-godot-specialist.md) has been host-discovered and
 used once for a bounded source-local handoff. The
-[design role](.pi/agents/ogs-design-specialist.md) exists and is host-listable
-but has not been invoked or independently accepted. Source-checkout paths are
-not installed-pack evidence.
+[design role](.pi/agents/ogs-design-specialist.md) was invoked once for a
+creation proposal; one observed human decision on the resulting brief passed
+CLI consistency validation. That check grants no execution authority. See the
+[capability checkpoint](docs/project-status.md) for the bounded acceptance and
+remaining work. Source-checkout paths are not installed-pack evidence.
 
 ## Licensing
 
