@@ -7,12 +7,12 @@ stdio** against a disposable copy of the trusted 2D fixture, and the produced
 **not** Pi-loaded integration, **not** editor/listener/shared-server routing,
 **not** a V1-03 recertification, and **not** full V1 acceptance.
 
-- Run: 2026-10-04 (host clock). Branch `feat/mcp-execution-validation`, HEAD
-  `e971fa35666870abd992cb7cb6afb860e9acc7e2`. No commit, push or PR.
-- Scratch root (ephemeral, preserved for rechecks):
-  `<smoke-root>`.
-- Evidence classes: **[observed]** = this run; **[guard]** = deterministic
-  harness test.
+- Historical run: 2026-10-04 (host clock), HEAD
+  `e971fa35666870abd992cb7cb6afb860e9acc7e2`; public record in `ae52d0c`.
+- Scratch root: `<smoke-root>` (ephemeral; not shipped in a clone).
+- Evidence classes: **[observed]** = historical SDK run; **[guard]** = its
+  deterministic harness test. Later native Pi health is separate:
+  [current MCP checkpoint](mcp-config.md#evidence-checkpoint).
 
 ## 0. Repo state **[observed]**
 
@@ -29,11 +29,10 @@ untouched) plus this new untracked `docs/godot-mcp-smoke.md`. `HEAD` stayed
 
 ## 1. Host and engine preflight **[observed]**
 
-`Godot_v4.7.2-stable_linux.x86_64` at
-`$TOOLS/godot/4.7.2/` — mode `0700`, size
-`146414384` (matches the approved candidate). `--version` under the allowlist →
-`4.7.2.stable.official.ed1daf0bf`, exit 0. Node `v26.8.2`. npm CLI
-`/home/linuxbrew/.linuxbrew/lib/node_modules/npm/bin/npm-cli.js`.
+`Godot_v4.7.2-stable_linux.x86_64` at `$TOOLS/godot/4.7.2/` — mode `0700`,
+size `146414384` (matches the approved candidate). `--version` under the
+allowlist → `4.7.2.stable.official.ed1daf0bf`, exit 0. Node `v26.8.2` and an
+explicit provisioned npm CLI were used; no normal-PATH discovery is implied.
 
 ## 2. Package provenance and integrity **[observed]**
 
@@ -148,7 +147,8 @@ by fresh independent hashes. No unexpected repository mutation was observed.
 Writes were configured for scratch paths, but absence of all outside-scratch
 writes was not established by filesystem auditing or confinement.
 
-Limitations: no Pi-native `.pi/mcp.json` loading, no editor/`run_project`/
+Limitations of this historical SDK run: no Pi-native `.pi/mcp.json` loading,
+no editor/`run_project`/
 `stop_project`/listener route, no shared server, no `3D` verifier change and no
 V1-03 recertification. The environment allowlist does not sandbox the
 filesystem or network. The `get_project_info` `require` defect above and the
@@ -201,6 +201,8 @@ Key artifacts: `out/mcp_smoke_evidence.json`, `out/mcp_smoke_client.{stdout,stde
   probe has no meaningful prior RED and is reported as functional evidence.
 - **Package defect (reported, not patched):** `get_project_info` ESM `require`
   failure; no `name` fidelity from `project.godot`.
-- **Not covered:** Pi-loaded configuration, editor/listener/shared routing,
-  3D verifier fix, gameplay mechanics, broader V1 certification. Broader
-  integration remains outside this evidence; the scratch root is ephemeral.
+- **Not covered by this SDK scene run:** Pi-loaded configuration,
+  editor/listener/shared routing, 3D verifier fix, gameplay mechanics, broader
+  V1 certification. Later human-reported native Pi health does not establish
+  native Pi scene mutation; see the [MCP checkpoint](mcp-config.md#evidence-checkpoint).
+  Broader integration remains outside this evidence; the scratch root is ephemeral.

@@ -4,8 +4,8 @@ This is the authoritative checkpoint for **where Open Game Studios (OGS) stands
 today**. It separates source-level acceptance from loader/delegation, engine
 execution, human acceptance, installation, and device evidence. It is not a
 release certification, and it deliberately carries no freshness date or
-certification claim. The publication checks for this documentation slice are
-still pending (see [Publication status](#publication-status)).
+certification claim. Public availability is separate from release readiness
+(see [Publication status](#publication-status)).
 
 ## How to read the matrix
 
@@ -35,7 +35,8 @@ installed-pack, engine, or whole-product acceptance.
 | Installer backend (detect / plan / consent / execute) | Accepted | Not run | Not run | Not run | Pending (G7) | n/a |
 | Godot 2D movement slice | Accepted | n/a | Historical observed | Historical human playtest | Not run | n/a |
 | Godot 3D scene work | Not implemented | Not run | Not run | Not run | Not run | Not run |
-| Blender asset + export | Not implemented | Not run | Not run | Not run | Not run | Not run |
+| Native Pi MCP configuration + launchers | Focused checks passed | Human-reported: 2 Blender / 14 Godot tools | Health for both; disposable Blender cube/export | Execution reported, not artistic approval | Not run | Not run |
+| Blender production asset + export | Foundation only | No studio-role handoff | Disposable cube verified; not V1-05 | Artistic approval not run | Not run | Not run |
 | Audio integration | Not implemented | Not run | Not run | Not run | Not run | Not run |
 | Independent game QA route | Not implemented | Not run | Not run | Not run | Not run | Not run |
 | Quest 3S Android/OpenXR/hand interaction | Not implemented | Not run | Not run | Not run | Not run | Pending device gate |
@@ -64,17 +65,24 @@ project roles.
 |---|---|
 | Game design | Read-only design role invoked once for a creation brief; one human approval observed and consistency-checked. |
 | Art direction | Staged. Contracts exist as metadata; no operational role. |
-| Blender production | Staged. No execution route connected. |
+| Blender production | Native MCP execution foundation exercised; production-role handoff and artistic approval pending. |
 | Godot implementation | Read-only diagnosis role used once; no 3D execution slice. |
 | Audio / music / SFX | Staged. Contract-level only; no playback route. |
 | Independent game QA | Staged. Distinct from code/native review and human playtest. |
+
+## Native MCP foundation checkpoint
+
+The [MCP guide](mcp-config.md#evidence-checkpoint) records source provenance,
+human-reported Pi execution, independent current-content checks, and retained
+failures separately. This foundation does not depend on Gentle Shell for MCP.
+MCP-3 remains **pending**, not complete: source configuration and one prepared
+workspace do not certify installation, studio routing, or the full journey.
 
 ## Historical evidence (labelled as historical)
 
 - A Go suite previously passed with **14 packages green and one package with no
   test files**, and formatting was clean. This was not re-run for the current
-  documentation-only slice, and it is not evidence about the nine documents
-  changed here.
+  documentation-only update; it is historical suite evidence, not a fresh check.
 - A 2D Godot fixture was executed headlessly and received a human playtest.
   This supports the 2D movement behavior only; it is not 3D, audio, Blender,
   device, or full-journey evidence.
@@ -115,17 +123,19 @@ or run.
 ## Publication status
 
 This repository is public and open for contributions as a work in progress.
-The private repository was renamed and backed up, the public-candidate assembly
-was checked, and main branch protection is active. This page reflects the
+Main branch protection is active. Publication is not clean-install or
+release certification, and no new publication checks are claimed here.
+This page reflects the
 current source checkpoint, not a finished release or installed product.
 
 ## Known limitations
 
-- No fresh build, engine run, installation, or full-journey acceptance was
-  performed for the current documentation slice.
+- This passive documentation update runs no build or engine. Earlier focused
+  builds and engine checks are recorded separately in the MCP guide; no real
+  installation or full-journey acceptance is established.
 - The six responsibilities are staged; the Godot and design roles each have one
   recorded real bounded invocation.
-- Blender, audio, independent game QA, Godot 3D, and the Quest 3S route remain
-  open, as does the full end-to-end continuation journey.
+- Blender production, audio, independent game QA, Godot 3D, and the Quest 3S
+  route remain open, as does the full end-to-end continuation journey.
 - Model identity, complete tool confinement, and multi-platform readiness are
   not established.

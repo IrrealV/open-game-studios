@@ -55,7 +55,7 @@ separate root the adapter gives its **engine child** process, which creates
 
 **Interpreter must stay the venv executable.** A standard venv symlinks
 `bin/python` to the base interpreter, which the symlink-free launcher rejects.
-Provision it with `python -m venv --copies` (candidate, not yet live-verified) so
+The historical provisioning run used `python -m venv --copies` successfully so
 `bin/python` is regular, then verify its prefix and deps. Never substitute the
 base interpreter: that drops venv packages. An explicit resolved Node executable
 is fine.
@@ -91,29 +91,29 @@ Rejected with one actionable stderr line and nonzero exit, before `chdir`/`execv
 - [x] Runtime `home/tmp/config/cache/data/state/run` and project/output roots are provisioned.
 - [x] Server interpreter is a non-symlinked venv executable with verified deps.
 - [x] Pi command uses `env -i` with explicit CLI args, not interpolation.
-- [ ] Both `tests/python` unittest runs were executed and reported honestly.
+- [x] Historical Python checks: base 100 passed + 2 optional skips; venv 102 passed, 0 skipped.
 
-## Provisioning evidence (local, disabled)
+## Historical provisioning evidence (local, disabled)
 
 A bounded provisioning run created the managed runtimes and a disposable
 validation project. It started no engine, MCP server, or Pi session and granted
 no project trust; both configured entries are `enabled: false`.
 
 - Blender 4.5.3 engine extracted fresh from the official Linux x64 archive
-  (sha256 `975c58fc…a72d845`) under `~/.local/share/ogs/tools/blender/4.5.3/`.
+  (sha256 `975c58fc…a72d845`) under `$TOOLS/blender/4.5.3/`.
   `--version` reports `Blender 4.5.3 LTS`, and its host libraries resolve.
-- Blender server venv at `~/.local/share/ogs/tools/mcp/blender/venv` created in
+- Blender server venv at `$TOOLS/mcp/blender/venv` created in
   place with `python -m venv --copies`; `bin/python` is a regular non-symlinked
   executable whose `sys.prefix` is the venv. The 30-package hash-pinned wheel
   lock (sha256 `bc4658ca…e9a1d`, `mcp==1.26.0`) installed with
   `--require-hashes --only-binary=:all:`; `pip check` reports no broken
   requirements. No server was started.
 - Godot package `@coding-solo/godot-mcp@0.1.1` installed under
-  `~/.local/share/ogs/tools/mcp/godot/` with `npm ci --ignore-scripts --omit=dev`
+  `$TOOLS/mcp/godot/` with `npm ci --ignore-scripts --omit=dev`
   from the reviewed 46-package lock (sha256 `e2cb3ecb…4baa624`). The installed
   `build/index.js` sha256 `fd3f5df6…38806dc0` matches the published archive
   member; no install scripts ran and no package was rebuilt.
-- Disposable validation project `~/.local/share/ogs/mcp-validation/` holds a
+- Disposable validation project `$WORKSPACE` holds a
   4-file copy of the trusted Godot fixture, a pre-staged (unexecuted) Blender
   build script, an engine output directory, and `home/tmp/config/cache/data/state/run`
   runtime trees for both servers. `.pi/mcp.json` is create-only (`0600`) with
@@ -122,13 +122,15 @@ no project trust; both configured entries are `enabled: false`.
 Both entries loaded as static `LaunchPlan` objects (real paths, environment
 allowlist, `cwd`) without any `execve`; the launcher's symlink checks pass on
 both interpreters. This validates the local configuration shape only. The
-`command`/`args` point at the uncommitted source launcher under `tools/mcp/` in
-this checkout, so this is a local development configuration, not an installed
-release, and it is not product acceptance.
+`command`/`args` used the source launcher under `tools/mcp/`, now recorded in
+public commit `4c6e753`; configuration emission followed in `db1e98e`. These are
+source-chain facts, not installed-release or product acceptance. `$TOOLS` and
+`$WORKSPACE` above are portable placeholders, not paths a clone provisions.
 
 ## Next step
 
-The persistent runtimes and local create-only Pi configuration now exist (above)
-with project trust still pending. Remaining: explicitly grant trust and run an
-explicitly authorized Pi-loaded functional smoke. No commit, push, or personal
-configuration in this source slice.
+The disabled provisioning snapshot above is historical. Subsequent human-reported
+native Pi health and Blender execution have separate evidence in the
+[MCP checkpoint](mcp-config.md#evidence-checkpoint); trust is still each user's
+explicit decision, never inherited from that run. MCP-3 and broader production
+acceptance remain pending; no clean installer or global binary upgrade is claimed.

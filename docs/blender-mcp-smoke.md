@@ -12,22 +12,16 @@ metadata, not independently reproduced; **[correction]** = observed during the
 bounded correction pass; **[independent]** = a separate read/verify process.
 
 - Initial run: 2026-10-03 (host clock). Correction pass: 2026-10-04.
-- Scratch root (ephemeral, kept for verification): `<smoke-root>`.
-- Branch `feat/mcp-execution-validation`, base
-  `f50a369a04c6c8c34122889ccfda6b57354d079e`. No commit, push, or PR.
+- Historical scratch root: `<smoke-root>` (ephemeral; not shipped in a clone).
+- Historical base: `f50a369a04c6c8c34122889ccfda6b57354d079e`;
+  public evidence recorded in `e971fa3`.
 
-## 0. Repo and tracker state (corrected) **[correction]**
+## 0. Historical repository boundary **[correction]**
 
-The initial worker's "repo left unchanged" claim was false. Actual state:
-
-- `docs/blender-mcp-smoke.md` was **added** by the worker (untracked); editing
-  it is the only repository write in this task.
-- `git status --porcelain` before and after the correction run:
-  `?? docs/blender-mcp-smoke.md` and `?? game-studio` (the latter pre-existing,
-  preserved untouched). No tracked source or configuration was modified.
-- The `/odd/` work tracker is git-ignored, so tracker edits never appear in
-  `git status`; the absence of `odd/` there is not evidence that it is unchanged.
-- The private checkout was never touched by this worker.
+The initial "repo left unchanged" claim was false: this document was added.
+No tracked source or configuration was modified in that run. Git status alone
+cannot establish that ignored local state is unchanged. This historical record
+is distinct from the later [native MCP checkpoint](mcp-config.md#evidence-checkpoint).
 
 ## 1. Host preflight and engine compatibility **[historical] + [correction]**
 
@@ -73,7 +67,7 @@ in this correction.
 
 ## 3. Dependency provisioning (wheel-only, hash-locked) **[historical]**
 
-Interpreter: `/home/linuxbrew/.linuxbrew/bin/python3` → CPython `3.14.7`,
+Interpreter: explicit provisioned Python → CPython `3.14.7`,
 pip `26.2.1`, in a fresh venv under the scratch root. `uv` was absent.
 
 Resolution was reviewed from a `pip --report` before installation:
@@ -313,9 +307,11 @@ execution run; those are reported as functional evidence only.
   were emitted.
 - **Scope limits.** Only the adapted headless route was exercised. Raw `bpy` is
   unsandboxed; environment isolation is not a security sandbox. The bridge/live
-  add-on route, upstream unmodified startup, Pi-native MCP loading
-  (`.pi/mcp.json` still not implemented), project-target binding, shared-server
-  routing, and the full V1 platform are **not** verified here.
+  add-on route, upstream unmodified startup, Pi-native MCP loading,
+  project-target binding, shared-server routing, and the full V1 platform are
+  **not** verified by this historical SDK run. The later native configuration
+  and human-reported Pi execution are recorded separately in the
+  [current checkpoint](mcp-config.md#evidence-checkpoint).
 - **Independent verification completed.** Fresh artifact-only checks passed:
   `.blend` reopen (dimensions, color and roughness), GLB binary POSITION decoding
   and material assertions, static archive containment, published checksum and

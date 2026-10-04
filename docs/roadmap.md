@@ -28,6 +28,16 @@ V1 tasks proceed in sequence, one writer at a time. Each task must deliver
 observable behavior with checks; a written role definition, a detected binary,
 or metadata alone does not establish readiness.
 
+## Execution foundation checkpoint (not a new V1 task)
+
+Native Pi MCP configuration and local launchers now have bounded source checks,
+human-reported health for Blender/Godot, and independently checked disposable
+Blender cube content. See the [MCP evidence checkpoint](mcp-config.md#evidence-checkpoint).
+MCP-3 remains pending. This prepared developer layout is not G7, a clean install,
+V1-05 production acceptance, or a studio-role/shared-routing handoff. V1-03
+through V1-11 remain open with their existing acceptance gates; metadata and
+partial handoffs do not satisfy them.
+
 ## Mandatory milestones (not optional)
 
 - **Blender production**: one real editable asset and export (V1-05) integrated
