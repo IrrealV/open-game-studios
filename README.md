@@ -8,6 +8,7 @@ and truthful provenance.
 **Current components:**
 - Go CLI (`game-studio`) for workspace bootstrap, diagnostics, and staged wizard
 - Visual wizard with plan-only preview (Bubble Tea UI, human-accepted)
+- Native Pi MCP foundation: explicit create-only configuration and local launchers
 - Core-game brief library: design → draft → consistency validation
 - Two agent roles (design specialist, Godot specialist) for read-only planning
 - Two Pi companion skills for brief workflows and Godot changes
@@ -36,6 +37,10 @@ for current capabilities and evidence levels.
 - **Installer/generator (Go):** the `game-studio` CLI bootstraps a workspace,
   runs host tool diagnostics, generates Godot-first studio profiles, and drives
   a Pi-only staged wizard with fingerprint-bound prerequisite plans.
+- **Native Pi MCP foundation:** `mcp-config` emits disabled Blender/Godot entries
+  together from one explicit spec. Human-reported Pi health and a disposable
+  Blender cube/export have bounded evidence; this is not an installed release
+  or studio-role handoff. See the [MCP guide](docs/mcp-config.md).
 - **Visual wizard:** plan-only preview with Bubble Tea UI (human visual
   acceptance: compact 80×25 PTY rendering, scrollable install plan, fingerprint
   disclosure). Installation (G7) runs only after explicit approval; the preview
@@ -72,7 +77,9 @@ for current capabilities and evidence levels.
 
 **Six studio responsibilities** are staged as on-demand capabilities, not
 always-running agents. Two (design, Godot) have bounded exercise with documented
-handoffs; four (art direction, Blender, audio, QA) remain unexercised.
+handoffs; four (art direction, Blender, audio, QA) remain unexercised as
+studio responsibilities. The Blender MCP execution foundation is separate from
+production-role exercise and artistic approval.
 
 See [docs/project-status.md](docs/project-status.md) for the full capability and
 evidence matrix.
@@ -157,6 +164,7 @@ for the full reuse/adapt/build matrix with evidence levels.
 | [docs/roadmap.md](docs/roadmap.md) | The 11 ordered V1 tasks, mandatory milestones, and deferred breadth. |
 | [docs/ogs-adoption-matrix.md](docs/ogs-adoption-matrix.md) | What we reuse, adapt, or build; evidence and priority. |
 | [docs/core-game-briefs.md](docs/core-game-briefs.md) | The core-game brief library and `brief` CLI in detail. |
+| [docs/mcp-config.md](docs/mcp-config.md) | Native Pi MCP configuration, prerequisites, evidence, and trust limits. |
 | [docs/generated-artifacts.md](docs/generated-artifacts.md) | Generated artifact classification and policy. |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | How to contribute. |
 | [AGENTS.md](AGENTS.md) | Portable agent instructions for this repository. |
