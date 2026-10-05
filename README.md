@@ -214,6 +214,7 @@ behavior only, not visual quality, fun, exports, or full-studio readiness.
 | `game-studio wizard` | Runs the Pi-only staged installer/personalization wizard. |
 | `game-studio smoke` / `smoke-suite` | Validates generated layout and content. |
 | `game-studio brief draft` / `brief check` | Builds a pending core-game draft, or checks one against a recorded decision. |
+| `game-studio mcp-config` | Emits a create-only `WORKSPACE/.pi/mcp.json` for explicit local Blender/Godot MCP runtimes from a JSON spec. |
 
 **Wizard modes** (mutually exclusive):
 - `--plan-only` — read-only preview with fingerprint (no writes)
