@@ -12,7 +12,8 @@ and truthful provenance.
 - Core-game brief library: design → draft → consistency validation
 - Two agent roles (design specialist, Godot specialist) for read-only planning
 - Two Pi companion skills for brief workflows and Godot changes
-- Test fixtures: 2D movement with human playtest; 3D prototype in progress
+- Test fixtures: 2D and disposable 3D mechanics with historical human playtests
+- Visual metadata CLI, approved Art Bible and three Asset Specs; production pending
 
 OGS is **not** a finished v1, not an installed product, and not a one-prompt
 game generator. The first-party source is MIT-licensed (see
@@ -27,7 +28,7 @@ for current capabilities and evidence levels.
 ## Development
 
 - **Branch protection:** `main` requires PR review; no force-push or direct commits
-- **CI:** Go workflow runs `go build` and `go test ./...` on all PRs
+- **CI:** Go workflow runs build/tests on pushes to `main` and PRs targeting `main`
 - **Review policy:** See [CONTRIBUTING.md](CONTRIBUTING.md) for the full flow
 
 ## Current reality
@@ -62,24 +63,36 @@ for current capabilities and evidence levels.
 - **Test fixtures:**
   - 2D Godot scene with movement/collision (human playtest: window, cyan square,
     arrow keys, stopping on release)
-  - 3D prototype "One Small Reach" in progress (Godot 4.7.2 version verified;
-    scene not yet created)
+  - 3D "One Small Reach" scene/script with historical mechanical and human
+    playtest acceptance; headless result **20/21**, retaining the known
+    diagonal-verifier expected-value defect
+- **Visual direction (V1-04):** Art Bible, three Asset Specs, audit and CLI at
+  accepted metadata scope, with recorded human Art Bible approval. This does
+  not establish Blender asset production or Godot import. See the
+  [historical evidence and qualifications](docs/project-status.md#historical-evidence-labelled-as-historical).
 
 **Not done yet:**
 
 - Full installation (G7: skills loading, Engram persistence, resource validation)
-- Godot 3D scenes (in progress: engine verified, fixture architecture planned)
-- Blender production (V1-05)
+- Coordinated resources and handoff for the next production unit
+- Blender production (V1-05) and Godot asset integration (V1-06)
+- Required ten-role catalog, with role-specific contracts, suitable skills and
+  later human-created profile assignment
 - Audio integration (V1-07)
 - Independent game QA (V1-08)
 - Quest 3S + OpenXR/hands (V1-09)
 - Full end-to-end journey with recovery (V1-11)
 
 **Six studio responsibilities** are staged as on-demand capabilities, not
-always-running agents. Two (design, Godot) have bounded exercise with documented
-handoffs; four (art direction, Blender, audio, QA) remain unexercised as
-studio responsibilities. The Blender MCP execution foundation is separate from
+always-running agents. Design/Godot have recorded bounded handoffs; visual
+metadata has its own historical approval. These do not establish a complete
+operational team. The Blender MCP execution foundation remains separate from
 production-role exercise and artistic approval.
+
+**Next production step: V1-05.** Reconcile the approved primitive-only visual
+baseline with the intended Blender deliverable and prepare its coordinated
+resources before execution. The smoke cube is not that production asset.
+See the [roadmap](docs/roadmap.md), including the required v1 agent catalog.
 
 See [docs/project-status.md](docs/project-status.md) for the full capability and
 evidence matrix.

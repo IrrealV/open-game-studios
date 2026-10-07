@@ -34,7 +34,8 @@ installed-pack, engine, or whole-product acceptance.
 | Wizard plan-only preview | Accepted | PTY-exercised | n/a | Human accepted | Not run | n/a |
 | Installer backend (detect / plan / consent / execute) | Accepted | Not run | Not run | Not run | Pending (G7) | n/a |
 | Godot 2D movement slice | Accepted | n/a | Historical observed | Historical human playtest | Not run | n/a |
-| Godot 3D scene work | Not implemented | Not run | Not run | Not run | Not run | Not run |
+| One Small Reach Godot 3D fixture (V1-03) | Accepted at disposable-fixture scope | No production-role acceptance claimed | Historical headless 20/21; known diagonal-verifier defect | Historical mechanical playtest accepted | Not run | Not run |
+| Visual brief / Art Bible / Asset Specs / Audit (V1-04) | Accepted at metadata scope; CLI and fixture artifacts exist | No operational art-role acceptance claimed | No asset generation or import | Art Bible approval recorded | Not run | n/a |
 | Native Pi MCP configuration + launchers | Focused checks passed | Human-reported: 2 Blender / 14 Godot tools | Health for both; disposable Blender cube/export | Execution reported, not artistic approval | Not run | Not run |
 | Blender production asset + export | Foundation only | No studio-role handoff | Disposable cube verified; not V1-05 | Artistic approval not run | Not run | Not run |
 | Audio integration | Not implemented | Not run | Not run | Not run | Not run | Not run |
@@ -59,14 +60,16 @@ installed-pack, engine, or whole-product acceptance.
 
 OGS defines six on-demand responsibilities. They are **responsibilities, not
 six operational agents**, and the current source supports at most two read-only
-project roles.
+project roles. The [required ten-role v1 catalog](roadmap.md#v1-agent-catalog)
+is a separate delivery requirement; its definitions, contracts, skills and
+profile assignment are not established by these responsibility descriptions.
 
 | Responsibility | Current state |
 |---|---|
 | Game design | Read-only design role invoked once for a creation brief; one human approval observed and consistency-checked. |
-| Art direction | Staged. Contracts exist as metadata; no operational role. |
+| Art direction | V1-04 visual metadata and recorded Art Bible approval accepted historically; no operational art-role or generated-asset acceptance. |
 | Blender production | Native MCP execution foundation exercised; production-role handoff and artistic approval pending. |
-| Godot implementation | Read-only diagnosis role used once; no 3D execution slice. |
+| Godot implementation | Read-only diagnosis role used once; separate disposable 3D execution/playtest accepted historically, with the 20/21 verifier limitation retained. |
 | Audio / music / SFX | Staged. Contract-level only; no playback route. |
 | Independent game QA | Staged. Distinct from code/native review and human playtest. |
 
@@ -86,6 +89,20 @@ workspace do not certify installation, studio routing, or the full journey.
 - A 2D Godot fixture was executed headlessly and received a human playtest.
   This supports the 2D movement behavior only; it is not 3D, audio, Blender,
   device, or full-journey evidence.
+- V1-03 delivered the [One Small Reach 3D fixture](../testdata/one-small-reach-3d/).
+  After the collection-position correction, human playtest accepted movement,
+  collection, feedback and framing. The recorded headless result was **20/21**:
+  the normalized-diagonal assertion has a known expected-value defect. This is
+  bounded mechanical/playtest acceptance, not a fully passing suite or a
+  production-agent execution claim. No engine check was rerun for this update.
+- V1-04 delivered the [visual CLI/contracts](visual-art-direction.md),
+  [Art Bible](../testdata/one-small-reach-3d/art-bible.md), three Asset Specs and
+  an Asset Audit. Human approval and a subsequent adapter-ready audit were
+  recorded historically. The committed Art Bible frontmatter records approval,
+  but its body still says pending; the committed audit retains the earlier
+  pre-approval state. These stale texts are not a fresh audit or asset approval.
+  The primitive-only baseline and the intended Blender output must be reconciled
+  before V1-05 execution; this status update does not change those artifacts.
 - Three bounded native reviews were completed and their authority consumed for
   the design-handoff delivery (DH-01, DH-02, DH-03). Earlier candidates were
   historically unavailable or blocked. Independent technical checks do not
@@ -95,10 +112,17 @@ workspace do not certify installation, studio routing, or the full journey.
 
 ## Current next task
 
-**V1-03 — implement and check a small Godot 3D task.** The accepted design cut
-is the input: a bounded, disposable 3D scene or script with explicit criteria
-and independent checking. It is not another design interview and not a
-full-platform certification.
+**V1-05 — produce a real Blender asset and export.** First reconcile the
+existing approved visual inputs and prepare the resources and coordinated
+handoff required for that asset. Then produce the editable asset/export before
+V1-06 Godot integration. Do not restart an already accepted design cut or
+substitute the disposable MCP cube for this production outcome.
+
+V1-03 and V1-04 retain the bounded historical acceptances above. The known
+verifier repair is a follow-up, not the next production priority unless a
+concrete blocking dependency or human reprioritization establishes otherwise.
+Model routing may need checking within the selected production route; a
+standalone agent/model diagnostic is not itself the next agreed milestone.
 
 **V1-02 — make design and its existing contracts executable — is accepted at
 bounded source-local scope.** The read-only design role was invoked once for a
@@ -133,9 +157,11 @@ current source checkpoint, not a finished release or installed product.
 - This passive documentation update runs no build or engine. Earlier focused
   builds and engine checks are recorded separately in the MCP guide; no real
   installation or full-journey acceptance is established.
-- The six responsibilities are staged; the Godot and design roles each have one
-  recorded real bounded invocation.
-- Blender production, audio, independent game QA, Godot 3D, and the Quest 3S
-  route remain open, as does the full end-to-end continuation journey.
+- The six responsibilities are not a complete operational team. The Godot and
+  design roles each have one recorded bounded invocation; this does not
+  establish the required ten-role catalog or coordinated production workflow.
+- Blender production and Godot asset integration, audio, independent game QA,
+  and the Quest 3S route remain open, as does the full end-to-end continuation
+  journey. The accepted disposable 3D fixture does not close these gates.
 - Model identity, complete tool confinement, and multi-platform readiness are
   not established.

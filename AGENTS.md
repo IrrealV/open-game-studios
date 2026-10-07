@@ -12,10 +12,24 @@ specific harness, model, or private memory system.
 
 ## Current next task
 
-The next concrete implementation task is **V1-03 — implement and check a small
-Godot 3D task** (see the roadmap). It is a bounded, disposable 3D slice that
-follows the accepted design cut; it is not another design interview, and it is
-not full-platform certification.
+The next production task is **V1-05 — produce a real Blender asset and export**
+(see the roadmap). First reconcile the approved visual inputs and prepare only
+the resources and coordinated handoff needed for that unit. The disposable MCP
+cube is execution-foundation evidence, not the V1-05 production asset.
+
+**V1-03 is historically accepted at disposable-fixture mechanical and human
+playtest scope.** Its recorded headless result remains **20/21**: the diagonal
+verifier has a known expected-value defect. Do not erase that failure or treat
+the scene as unimplemented. The verifier correction is a separate follow-up,
+not a prerequisite unless it demonstrably blocks the selected production task.
+
+**V1-04 is historically accepted at approved visual-metadata scope:** Art Bible,
+three Asset Specs and an Asset Audit. This does not approve generated assets or
+certify a production-role handoff. The Art Bible records approval but retains
+stale pending prose; the committed audit retains its pre-approval state. Its
+primitive-only constraints also need a bounded production-scope decision before
+claiming they authorize an imported Blender asset. Preserve the approval record
+and distinguish historical reports from freshly executed checks.
 
 **V1-02 is accepted at bounded source-local scope.** The read-only design role
 was actually invoked once for a creation request and returned an eight-section

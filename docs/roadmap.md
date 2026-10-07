@@ -14,8 +14,8 @@ Status reflects the checkpoint in [project-status.md](project-status.md).
 |---|---|---|---|
 | V1-01 | Load the OGS core and demonstrate a domain handoff | **Done** (source-local technical scope) | Core guidance loaded, grouped skill delivery, a discovered Godot role, and one real bounded handoff with a returned result. |
 | V1-02 | Make design and its existing contracts executable | **Done** (bounded source-local creation journey) | Turn a request into a bounded approved work brief through the design role, supporting creation/direct-phase/change/repair. The design role was invoked once for a creation request and returned an eight-section `gdd-slice` creation proposal (a `coregame.DraftRequest`), not an approval or executable plan; the CLI produced the canonical pending draft from that proposal and accepted the downstream consistency of an observed human approval of that exact brief (consistency only, not authentication or consent). Creation/direct-phase/change/repair remain supported by accepted source and fixtures; only the one creation journey was observed live. |
-| V1-03 | Implement and check a small Godot 3D task | Open | Godot role creates or changes a disposable scene/script with bounded criteria and independent checking. Engine evidence plus a human-tryable result, not a generated profile. |
-| V1-04 | Produce an actionable visual brief and asset specification | Open | Art direction uses the existing Art Bible / Asset Spec / Asset Audit contracts; distinguishes references, imported assets, and production operations. |
+| V1-03 | Implement and check a small Godot 3D task | **Accepted** (historical disposable-fixture mechanics and human playtest) | One Small Reach scene/script exists and received a human playtest after the collection-position fix. Recorded headless result is 20/21 with a known diagonal-verifier expected-value defect; not an all-green suite, production-role or platform certification. |
+| V1-04 | Produce an actionable visual brief and asset specification | **Accepted** (historical approved visual metadata) | Art Bible, three Asset Specs and Asset Audit implemented; human Art Bible approval recorded. No asset generation or integration accepted. Stale pending prose and the committed pre-approval audit must not be mistaken for a fresh readiness result. |
 | V1-05 | Produce a real Blender asset and export | Open | One verified Blender execution route, basic modeling/material work, a real editable asset and export, and agreed scale/orientation/material requirements. A detected binary or named placeholder is not enough. |
 | V1-06 | Integrate and validate the Blender asset in Godot | Open | Godot import/scene integration validating paths, scale, materials, and collisions, with an independent visual/technical audit. |
 | V1-07 | Integrate real music, ambience, and effects | Open | Activate the audio role and a lean audio contract (intended use, source/license, file, duration/loop, checks); basic levels, loops, and transitions with actual playback plus human listening. |
@@ -28,15 +28,24 @@ V1 tasks proceed in sequence, one writer at a time. Each task must deliver
 observable behavior with checks; a written role definition, a detected binary,
 or metadata alone does not establish readiness.
 
+**Next: prepare and execute V1-05, then V1-06.** Use the existing approved game
+intent and visual metadata rather than restarting design. Before production,
+resolve the primitive-only baseline versus the intended Blender export and
+prepare the resources, permissions and coordinated handoff needed for that
+specific asset. Existing approval is not blanket permission for a new asset
+scope. Agent/model checks belong to this route when needed; an unrelated
+verifier diagnosis does not automatically take priority over it.
+
 ## Execution foundation checkpoint (not a new V1 task)
 
 Native Pi MCP configuration and local launchers now have bounded source checks,
 human-reported health for Blender/Godot, and independently checked disposable
 Blender cube content. See the [MCP evidence checkpoint](mcp-config.md#evidence-checkpoint).
 MCP-3 remains pending. This prepared developer layout is not G7, a clean install,
-V1-05 production acceptance, or a studio-role/shared-routing handoff. V1-03
-through V1-11 remain open with their existing acceptance gates; metadata and
-partial handoffs do not satisfy them.
+V1-05 production acceptance, or a studio-role/shared-routing handoff. The bounded
+historical V1-03/V1-04 acceptances above remain distinct from this foundation.
+V1-05 through V1-11 remain open; a successful disposable smoke does not satisfy
+their production, installation or full-journey gates.
 
 ## Mandatory milestones (not optional)
 
@@ -48,6 +57,23 @@ partial handoffs do not satisfy them.
   self-approved author report.
 - **Quest 3S**: the separately gated Android/OpenXR/hand-interaction route
   (V1-09).
+
+## V1 agent catalog
+
+V1 must include the agreed ten roles: creative director, narrative designer,
+art director / visual reviewer, game designer, orchestrator / producer, lead
+Godot programmer, QA lead / verifier, technical director, scout / explorer,
+and volume worker. They must be available for later assignment to a
+human-created profile; this is required v1 scope, not a claim that all ten
+currently exist or must run for every task. Blender and audio responsibilities
+above remain required regardless of how work is assigned to these roles.
+
+Each role needs specific instructions, explicit input/output and permission
+contracts, suitable skills and a representative bounded check. Reuse the shared
+handoff contract; a role file or model assignment alone is not operational
+acceptance. Preserve the agreed model choices while distinguishing preferences,
+applied host configuration and the effective model observed during execution.
+Pi/Gentle Shell own model selection and orchestration; no new provider system.
 
 ## Deferred breadth (post-v1, important but not blocking)
 
